@@ -136,7 +136,7 @@ def main():
     pages = sys.argv[1:] or sorted(p.name for p in RACINE.glob("*.html"))
     SORTIE.mkdir(parents=True, exist_ok=True)
     port = 9333
-    with tempfile.TemporaryDirectory() as profil:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as profil:
         proc = subprocess.Popen([
             chrome, "--headless", "--disable-gpu", "--hide-scrollbars", "--no-first-run",
             "--no-default-browser-check", f"--user-data-dir={profil}",
