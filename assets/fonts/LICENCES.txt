@@ -1,0 +1,7 @@
+Polices auto-hebergees (sous-ensemble latin, format WOFF2)
+
+- Montserrat 600 et 700 : Copyright The Montserrat Project Authors.
+- Source Sans 3 400 et 600 : Copyright Adobe.
+
+Les deux polices sont distribuees sous licence SIL Open Font License 1.1
+(https://openfontlicense.org). Fichiers obtenus via le paquet Fontsource 5.1.0.
