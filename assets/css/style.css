@@ -728,3 +728,5 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .profil-contacts dt { font-weight: 600; font-size: .9rem; color: var(--dite-brun-gris); }
 .profil-contacts dd { margin-bottom: .6rem; word-break: break-word; }
+.vignette-actu { aspect-ratio: 2 / 1; object-fit: cover; object-position: top; height: auto; }
+.carte-compacte .lien-fleche { color: var(--dite-laterite); }

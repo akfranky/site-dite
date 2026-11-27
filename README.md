@@ -15,16 +15,20 @@ Après chaque modification, enregistrez le fichier puis actualisez la page dans 
 ```
 site-dite/
 ├── index.html            Accueil
-├── departement.html      Présentation, mot du chef, missions, organisation
-├── parcours.html         Concours, auditeurs libres, comparatif, questions fréquentes
-├── cursus.html           Schéma du cursus, cycles, unités d'enseignement, stages
-├── enseignants.html      Cartes des enseignants et personnel administratif
-├── recherche.html        Domaines, mémoires, publications, séminaires
-├── etudiants.html        Emplois du temps, calendrier, ressources, documents
-├── actualites.html       Liste des actualités
-├── actualite.html        Un article (modèle à copier pour chaque nouvel article)
-├── contact.html          Coordonnées, formulaire, plan d'accès
-├── 404.html              Page affichée quand une adresse n'existe pas
+├── 404.html              Page affichée quand une adresse n'existe pas (reste à la racine)
+├── pages/
+│   ├── departement.html              Présentation, mot du chef, missions, organisation
+│   ├── parcours.html                 Concours, auditeurs libres, comparatif, questions fréquentes
+│   ├── cursus.html                   Schéma du cursus, cycles, unités d'enseignement, stages
+│   ├── enseignants.html              Cartes des enseignants (résumé), personnel administratif
+│   ├── profil-tekouabou.html         Profil complet d'un enseignant (modèle à copier)
+│   ├── profil-exemple.html           Profil d'exemple, lié aux cartes d'exemple
+│   ├── recherche.html                Domaines, mémoires, publications, séminaires
+│   ├── etudiants.html                Emplois du temps, calendrier, ressources, documents
+│   ├── actualites.html               Liste des actualités
+│   ├── actualite.html                Article : suspension du recrutement des auditeurs libres
+│   ├── actualite-concours-2026.html  Article : concours 2025-2026, avec captures des arrêtés
+│   └── contact.html                  Coordonnées, formulaire, plan d'accès
 ├── lib/                  Bootstrap et Bootstrap Icons : NE JAMAIS MODIFIER
 ├── assets/
 │   ├── css/style.css     Couleurs et mise en forme du site
@@ -35,6 +39,8 @@ site-dite/
 ├── outils/               Scripts facultatifs (vérifications, captures, images, menu)
 └── docs/captures/        Captures d'écran du site
 ```
+
+**Chemins relatifs.** Les pages du dossier `pages/` remontent d'un niveau pour atteindre les images, les styles et l'accueil : elles écrivent `../assets/…`, `../lib/…` et `../index.html`. Entre elles, elles se citent directement (`contact.html`). L'accueil et la page 404, à la racine, écrivent `assets/…` et `pages/contact.html`. La page 404 reste à la racine, car GitHub Pages et Netlify ne la cherchent qu'à cet endroit.
 
 Chaque page contient, dans l'ordre : l'en-tête (entre `<!-- ENTETE -->` et `<!-- /ENTETE -->`), le contenu (dans `<main>`), puis le pied de page (entre `<!-- PIED -->` et `<!-- /PIED -->`).
 
@@ -54,50 +60,53 @@ Repères utiles dans le code :
 
 ## 4. Ajouter un enseignant
 
+Chaque enseignant a deux éléments : une **carte** courte dans `pages/enseignants.html` (photo, nom, grade, trois domaines au plus) et une **page de profil** complète (`pages/profil-nom.html`).
+
 1. Préparez la photo (portrait, fond neutre). Convertissez-la avec :
    ```
    python outils/convertir_image.py photo.jpg assets/img/enseignants/prenomnom.webp
    ```
    Le script recadre en 4:3, réduit à 480 x 360 px et vérifie que le fichier pèse moins de 100 Ko. Sans Python, utilisez un site de conversion WebP puis vérifiez la taille.
-2. Ouvrez `enseignants.html` et repérez le bloc qui commence par `<!-- ENSEIGNANT : Dr Ing. Cedric Stephane Koumetio Tekouabou -->`. Copiez tout ce bloc, jusqu'à la balise `</div>` qui ferme la colonne, et collez-le juste après.
-3. Dans la copie, modifiez :
-   - `data-domaines="ia donnees tice"` : les domaines de l'enseignant, séparés par une espace, parmi `tice`, `logiciel`, `reseaux`, `ia`, `donnees`. Ce sont eux qui font fonctionner les boutons de filtre.
-   - `id="tekouabou"` et les deux mentions `profil-tekouabou` : remplacez `tekouabou` par un identifiant unique, sans espace ni accent (par exemple `dupont`).
-   - la photo (`src`, `alt`), le nom, le grade, la fonction, les étiquettes « Enseigne » et « Recherche ».
-   - les icônes de contact : supprimez la ligne `<li>…</li>` de chaque lien que l'enseignant n'a pas. Une icône ne doit apparaître que si le lien existe. Pour GitHub, ajoutez :
-     ```html
-     <li><a class="btn-icone" href="https://github.com/IDENTIFIANT" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a></li>
-     ```
-   - le profil déplié : présentation, enseignements, domaines de recherche, publications, contacts en clair.
-4. Supprimez un bloc `<!-- PROFIL D'EXEMPLE … -->` chaque fois qu'un vrai profil le remplace.
-5. Mettez à jour le compteur affiché sous les filtres (« 4 profils affichés ») : il est recalculé automatiquement à l'ouverture de la page, mais le nombre écrit dans le HTML sert si JavaScript est désactivé.
-6. Si l'enseignant a de nouveaux domaines de recherche, ajoutez son nom dans `recherche.html`.
+2. **Page de profil.** Copiez `pages/profil-tekouabou.html` sous le nom `pages/profil-dupont.html` (sans espace ni accent). Dans la copie, modifiez le `<title>`, la `meta description`, le fil d'Ariane, le `<h1>`, la photo (`src="../assets/img/enseignants/dupont.webp"` et `alt`), puis chaque section : présentation, enseignements, domaines de recherche, publications, contacts.
+   Pour les icônes de contact, supprimez la ligne `<li>…</li>` de chaque lien que l'enseignant n'a pas : une icône n'apparaît que si le lien existe. Pour GitHub, ajoutez :
+   ```html
+   <li><a class="btn-icone" href="https://github.com/IDENTIFIANT" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a></li>
+   ```
+3. **Carte.** Dans `pages/enseignants.html`, copiez le bloc qui commence par `<!-- ENSEIGNANT : Tekouabou … -->`, jusqu'à la balise `</div>` qui ferme la colonne, et collez-le juste après. Dans la copie, modifiez :
+   - `data-domaines="ia donnees tice"` : les domaines, séparés par une espace, parmi `tice`, `logiciel`, `reseaux`, `ia`, `donnees`. Ce sont eux qui font fonctionner les boutons de filtre ;
+   - `id="tekouabou"` : un identifiant unique (par exemple `dupont`) ;
+   - le lien `href="profil-tekouabou.html"` : le nom de la nouvelle page de profil ;
+   - la photo, le nom, le grade et les étiquettes de domaine (trois au plus).
+4. Supprimez un bloc `<!-- PROFIL D'EXEMPLE … -->` chaque fois qu'un vrai profil le remplace. Quand il n'en reste plus, supprimez aussi `pages/profil-exemple.html`.
+5. Mettez à jour le compteur écrit sous les filtres (« 4 profils affichés ») : il est recalculé à l'ouverture de la page, mais le nombre écrit sert si JavaScript est désactivé.
+6. Dans `pages/recherche.html`, ajoutez le nom de l'enseignant, avec un lien vers son profil, dans les domaines concernés.
 
 La publication d'une photo ou d'un numéro de téléphone demande l'accord écrit de l'enseignant.
 
 ## 5. Ajouter une actualité
 
-1. Copiez `actualite.html` sous un nouveau nom, sans espace ni accent (par exemple `actualite-soutenances-2027.html`).
+1. Dans le dossier `pages/`, copiez `actualite.html` (article simple) ou `actualite-concours-2026.html` (article avec tableau et captures) sous un nouveau nom, sans espace ni accent (par exemple `pages/actualite-soutenances-2027.html`).
 2. Dans la copie, modifiez le `<title>`, la `meta description`, le fil d'Ariane, le titre `<h1>`, la catégorie, la date (`<time datetime="2027-06-15">15 juin 2027</time>`), le texte et les pièces jointes.
 3. Pour l'image de l'article : convertissez-la avec
    `python outils/convertir_image.py photo.jpg assets/img/actualites/nom.webp --format 16:9 --largeur 960 --max-ko 150`,
    puis remplacez le bloc `<div class="emplacement-image …">…</div>` par
-   `<img class="img-fluid rounded-3 mb-4" src="assets/img/actualites/nom.webp" width="960" height="540" alt="Description de l'image">`.
-4. Dans `actualites.html`, copiez une carte (le bloc `<div class="col-md-6 col-lg-4" data-domaines="…">`), placez-la en premier, et modifiez le titre, la date, le résumé et le lien. La valeur de `data-domaines` est la catégorie : `annonce`, `concours`, `auditeurs`, `evenement`, `soutenance` ou `vie`.
-5. Sur l'accueil (`index.html`), la section « Dernières actualités » montre les trois articles les plus récents : remplacez la carte la plus ancienne par la nouvelle.
+   `<img class="img-fluid rounded-3 mb-4" src="../assets/img/actualites/nom.webp" width="960" height="540" alt="Description de l'image">`.
+   Pour la capture d'un document officiel (arrêté, communiqué), enregistrez une image de la première page, convertissez-la de la même façon avec `--format 3:4 --largeur 760`, et faites-en un lien vers le PDF officiel.
+4. Dans `pages/actualites.html`, copiez une carte (le bloc `<div class="col-md-6 col-lg-4" data-domaines="…">`), placez-la en premier, et modifiez le titre, la date, le résumé et le lien. La valeur de `data-domaines` est la catégorie : `annonce`, `concours`, `auditeurs`, `evenement`, `soutenance` ou `vie`.
+5. Sur l'accueil (`index.html`), la section « Dernières actualités » montre les trois articles les plus récents : remplacez la carte la plus ancienne par la nouvelle. Depuis l'accueil, liens et images s'écrivent `pages/actualite-….html` et `assets/img/…` (sans `../`).
 6. Le badge « Nouveau » (`<span class="badge-nouveau">Nouveau</span>`) se place sur l'article le plus récent ; retirez-le des anciens.
 7. Supprimez les cartes marquées « Exemple » dès que de vrais articles sont publiés.
 
-Au-delà de neuf articles, créez `actualites-2.html` (copie de `actualites.html` avec les articles plus anciens) et activez les liens « Suivant » et « Précédent » de la pagination.
+Au-delà de neuf articles, créez `pages/actualites-2.html` (copie de `actualites.html` avec les articles plus anciens) et activez les liens « Suivant » et « Précédent » de la pagination.
 
 ## 6. Ajouter un document à télécharger
 
 1. Placez le fichier PDF dans `assets/docs/`, avec un nom sans espace ni accent (par exemple `calendrier-2026-2027.pdf`).
-2. Dans `etudiants.html`, section « Documents à télécharger », remplacez la ligne concernée par :
+2. Dans `pages/etudiants.html`, section « Documents à télécharger », remplacez la ligne concernée par :
    ```html
    <li class="list-group-item">
      <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
-     <div><a href="assets/docs/calendrier-2026-2027.pdf">Calendrier académique 2026-2027</a><div class="meta">PDF, 240 Ko</div></div>
+     <div><a href="../assets/docs/calendrier-2026-2027.pdf">Calendrier académique 2026-2027</a><div class="meta">PDF, 240 Ko</div></div>
    </li>
    ```
    Indiquez toujours le format et la taille réelle du fichier (clic droit, Propriétés).
@@ -105,32 +114,32 @@ Au-delà de neuf articles, créez `actualites-2.html` (copie de `actualites.html
 ## 7. Mettre à jour un emploi du temps
 
 1. Enregistrez le PDF dans `assets/docs/`, par exemple `edt-niveau-1.pdf`. Gardez le même nom d'une version à l'autre : les liens restent valables.
-2. Dans `etudiants.html`, repérez l'onglet du niveau (`id="edt-n1"` pour le niveau 1, jusqu'à `edt-n5`) et remplacez ses deux paragraphes par :
+2. Dans `pages/etudiants.html`, repérez l'onglet du niveau (`id="edt-n1"` pour le niveau 1, jusqu'à `edt-n5`) et remplacez ses deux paragraphes par :
    ```html
-   <p class="mb-2"><a class="btn btn-primary" href="assets/docs/edt-niveau-1.pdf"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Emploi du temps du niveau 1 (PDF, 180 Ko)</a></p>
+   <p class="mb-2"><a class="btn btn-primary" href="../assets/docs/edt-niveau-1.pdf"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Emploi du temps du niveau 1 (PDF, 180 Ko)</a></p>
    <p class="text-secondary small mb-0">Mis à jour le 5 janvier 2027</p>
    ```
 3. Pour annoncer la mise à jour, modifiez le message jaune en haut de la page et retirez l'étiquette « Exemple d'annonce ».
 
 ## 8. Modifier le menu ou le pied de page
 
-Le menu et le pied de page sont recopiés dans les onze pages. Deux méthodes :
+Le menu et le pied de page sont recopiés dans toutes les pages. Deux méthodes :
 
 - **Avec Python (recommandé)** : modifiez `outils/gabarit/entete.html` ou `outils/gabarit/pied.html`, puis lancez depuis le dossier du site :
   ```
   python outils/synchroniser_gabarit.py
   ```
-  Le script recopie le modèle dans toutes les pages et marque la rubrique active grâce à l'attribut `data-page` de la balise `<body>`.
-- **À la main** : faites la même modification dans les onze fichiers HTML, entre les commentaires `<!-- ENTETE -->` et `<!-- /ENTETE -->` (ou `<!-- PIED -->` et `<!-- /PIED -->`).
+  Le script recopie le modèle dans toutes les pages (racine et `pages/`), remplace `{{racine}}` et `{{pages}}` par les bons chemins, et marque la rubrique active grâce à l'attribut `data-page` de la balise `<body>`.
+- **À la main** : faites la même modification dans tous les fichiers HTML, en adaptant les chemins (`../` dans `pages/`), entre les commentaires `<!-- ENTETE -->` et `<!-- /ENTETE -->` (ou `<!-- PIED -->` et `<!-- /PIED -->`).
 
 Pour retirer le bandeau « Version de travail » une fois les contenus validés, supprimez le bloc `<div class="bandeau-travail">…</div>` du modèle d'en-tête, puis synchronisez.
 
 ## 9. Activer le formulaire de contact
 
-Le formulaire de `contact.html` n'envoie rien pour l'instant : il affiche un message et l'adresse électronique. Pour l'activer avec Formspree (offre gratuite limitée) :
+Le formulaire de `pages/contact.html` n'envoie rien pour l'instant : il affiche un message et l'adresse électronique. Pour l'activer avec Formspree (offre gratuite limitée) :
 
 1. Créez un compte sur formspree.io avec l'adresse du secrétariat, puis un formulaire. Formspree donne une adresse du type `https://formspree.io/f/abcdwxyz`.
-2. Dans `contact.html`, sur la balise `<form>` :
+2. Dans `pages/contact.html`, sur la balise `<form>` :
    - ajoutez `action="https://formspree.io/f/abcdwxyz"` ;
    - supprimez l'attribut `data-formulaire-demo`.
 3. Supprimez le bloc `<div class="alert alert-info" … data-message-demo hidden>…</div>`.
