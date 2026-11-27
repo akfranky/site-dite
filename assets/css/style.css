@@ -1,0 +1,713 @@
+/*
+ * Site du DITE, ENS de Yaounde : feuille de style du site.
+ * Chargee APRES lib/bootstrap/css/bootstrap.min.css (ne jamais modifier ce fichier).
+ *
+ * Sommaire
+ *  1. Polices auto-hebergees
+ *  2. Charte graphique (variables) et suppression du bleu Bootstrap
+ *  3. Base : typographie, liens, focus
+ *  4. Composants Bootstrap recolores
+ *  5. Gabarit : lien d'evitement, bandeau, navigation, bandeaux de titre, pied de page
+ *  6. Sections et blocs de contenu
+ *  7. Enseignants
+ *  8. Tableaux lisibles sur mobile
+ *  9. Divers (impression, mouvement reduit)
+ */
+
+/* 1. Polices auto-hebergees ------------------------------------------- */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/montserrat-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/montserrat-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/source-sans-3-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/source-sans-3-latin-600-normal.woff2") format("woff2");
+}
+
+/* 2. Charte graphique -------------------------------------------------- */
+:root {
+  --dite-ebene: #1E1A17;
+  --dite-ebene-rgb: 30, 26, 23;
+  --dite-laterite: #A63D24;
+  --dite-laterite-rgb: 166, 61, 36;
+  --dite-laterite-fonce: #852F1A;
+  --dite-laterite-clair: #F6E4DD;   /* fond des etiquettes "Enseigne" */
+  --dite-ocre: #E8B04B;
+  --dite-ocre-fonce: #D49A2F;
+  --dite-ocre-clair: #FBEFD6;       /* fond des etiquettes "Recherche" */
+  --dite-ocre-texte: #6B4A0F;       /* texte sur fond ocre clair (contraste AA) */
+  --dite-sable: #F6F1EA;
+  --dite-sable-fonce: #EADFD1;
+  --dite-anthracite: #212529;
+  --dite-brun-gris: #6B5E55;
+  --dite-titres: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Variables Bootstrap : plus aucun bleu par defaut */
+  --bs-primary: #A63D24;
+  --bs-primary-rgb: 166, 61, 36;
+  --bs-primary-text-emphasis: #852F1A;
+  --bs-primary-bg-subtle: #F6E4DD;
+  --bs-primary-border-subtle: #E0B3A6;
+  --bs-blue: #A63D24;
+  --bs-link-color: #A63D24;
+  --bs-link-color-rgb: 166, 61, 36;
+  --bs-link-hover-color: #1E1A17;
+  --bs-link-hover-color-rgb: 30, 26, 23;
+  --bs-body-font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --bs-body-font-size: 1.0625rem;
+  --bs-body-line-height: 1.6;
+  --bs-body-color: #212529;
+  --bs-secondary-color: #6B5E55;
+  --bs-tertiary-bg: #F6F1EA;
+  --bs-focus-ring-color: rgba(166, 61, 36, .35);
+  --bs-border-radius: .5rem;
+  --bs-border-radius-lg: .75rem;
+}
+
+/* 3. Base --------------------------------------------------------------- */
+body {
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, .h1, .h2, .h3, .h4, .h5, .h6, h5, h6 {
+  font-family: var(--dite-titres);
+  font-weight: 700;
+  color: var(--dite-ebene);
+  letter-spacing: -.01em;
+}
+h1, .h1 { font-size: calc(1.6rem + 1.4vw); }
+h2, .h2 { font-size: calc(1.4rem + .6vw); }
+h3, .h3 { font-size: 1.25rem; font-weight: 600; }
+h4, .h4 { font-size: 1.1rem; font-weight: 600; }
+@media (min-width: 1200px) {
+  h1, .h1 { font-size: 2.25rem; }
+  h2, .h2 { font-size: 1.75rem; }
+  h3, .h3 { font-size: 1.375rem; }
+}
+.lead { font-size: 1.2rem; }
+.text-secondary, .text-muted { color: var(--dite-brun-gris) !important; }
+.text-laterite { color: var(--dite-laterite) !important; }
+.small-caps { font-variant: small-caps; }
+code, kbd, pre { font-size: .9rem; }
+
+a { text-underline-offset: .18em; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 3px solid var(--dite-laterite);
+  outline-offset: 2px;
+}
+.site-nav :focus-visible,
+.page-header :focus-visible,
+.hero :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--dite-ocre);
+}
+
+/* 4. Composants Bootstrap recolores ----------------------------------- */
+.btn { font-weight: 600; }
+.btn-primary {
+  --bs-btn-bg: #A63D24;
+  --bs-btn-border-color: #A63D24;
+  --bs-btn-hover-bg: #852F1A;
+  --bs-btn-hover-border-color: #852F1A;
+  --bs-btn-active-bg: #852F1A;
+  --bs-btn-active-border-color: #852F1A;
+  --bs-btn-disabled-bg: #A63D24;
+  --bs-btn-disabled-border-color: #A63D24;
+  --bs-btn-focus-shadow-rgb: 166, 61, 36;
+}
+.btn-outline-primary {
+  --bs-btn-color: #A63D24;
+  --bs-btn-border-color: #A63D24;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #A63D24;
+  --bs-btn-hover-border-color: #A63D24;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #852F1A;
+  --bs-btn-active-border-color: #852F1A;
+  --bs-btn-disabled-color: #A63D24;
+  --bs-btn-disabled-border-color: #A63D24;
+  --bs-btn-focus-shadow-rgb: 166, 61, 36;
+}
+/* Bouton d'appel sur fond sombre */
+.btn-accent {
+  --bs-btn-color: #1E1A17;
+  --bs-btn-bg: #E8B04B;
+  --bs-btn-border-color: #E8B04B;
+  --bs-btn-hover-color: #1E1A17;
+  --bs-btn-hover-bg: #D49A2F;
+  --bs-btn-hover-border-color: #D49A2F;
+  --bs-btn-active-color: #1E1A17;
+  --bs-btn-active-bg: #D49A2F;
+  --bs-btn-active-border-color: #D49A2F;
+  --bs-btn-focus-shadow-rgb: 232, 176, 75;
+}
+.btn-outline-light { --bs-btn-hover-color: #1E1A17; }
+.btn-link { --bs-btn-color: #A63D24; --bs-btn-hover-color: #1E1A17; }
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #C98A79;
+  box-shadow: 0 0 0 .25rem rgba(166, 61, 36, .25);
+}
+.form-check-input:checked {
+  background-color: #A63D24;
+  border-color: #A63D24;
+}
+.form-check-input:focus {
+  border-color: #C98A79;
+  box-shadow: 0 0 0 .25rem rgba(166, 61, 36, .25);
+}
+.form-label { font-weight: 600; }
+.btn-close:focus,
+.navbar-toggler:focus { box-shadow: 0 0 0 .25rem rgba(232, 176, 75, .5); }
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #A63D24;
+  --bs-dropdown-link-active-color: #fff;
+  --bs-dropdown-link-hover-bg: var(--dite-sable);
+  --bs-dropdown-border-color: var(--dite-sable-fonce);
+}
+.nav-pills {
+  --bs-nav-pills-link-active-bg: #A63D24;
+}
+.pagination {
+  --bs-pagination-color: #A63D24;
+  --bs-pagination-hover-color: #852F1A;
+  --bs-pagination-hover-bg: var(--dite-sable);
+  --bs-pagination-focus-color: #852F1A;
+  --bs-pagination-focus-bg: var(--dite-sable);
+  --bs-pagination-focus-box-shadow: 0 0 0 .25rem rgba(166, 61, 36, .25);
+  --bs-pagination-active-bg: #A63D24;
+  --bs-pagination-active-border-color: #A63D24;
+  --bs-pagination-disabled-color: var(--dite-brun-gris);
+}
+.list-group {
+  --bs-list-group-active-bg: #A63D24;
+  --bs-list-group-active-border-color: #A63D24;
+}
+.progress { --bs-progress-bar-bg: #A63D24; }
+.table-primary { --bs-table-bg: var(--dite-laterite-clair); --bs-table-color: var(--dite-anthracite); }
+
+.accordion {
+  --bs-accordion-active-bg: var(--dite-sable);
+  --bs-accordion-active-color: var(--dite-laterite);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(166, 61, 36, .25);
+  --bs-accordion-btn-focus-border-color: #C98A79;
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231E1A17' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23A63D24' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+}
+.accordion-button {
+  font-family: var(--dite-titres);
+  font-weight: 600;
+  color: var(--dite-ebene);
+}
+
+/* Onglets : l'onglet actif est souligne d'ocre */
+.nav-tabs {
+  --bs-nav-tabs-link-active-color: var(--dite-ebene);
+  --bs-nav-tabs-link-active-border-color: var(--dite-sable-fonce) var(--dite-sable-fonce) #fff;
+  --bs-nav-link-color: var(--dite-laterite);
+  --bs-nav-link-hover-color: var(--dite-laterite-fonce);
+  gap: .25rem;
+}
+.nav-tabs .nav-link { font-weight: 600; }
+.nav-tabs .nav-link.active { box-shadow: inset 0 -4px 0 var(--dite-ocre); }
+
+/* Badges */
+.badge-categorie {
+  display: inline-block;
+  padding: .25em .6em;
+  border-radius: .35rem;
+  font-size: .8rem;
+  font-weight: 600;
+  background-color: var(--dite-laterite-clair);
+  color: var(--dite-laterite-fonce);
+}
+.badge-nouveau {
+  display: inline-block;
+  padding: .25em .6em;
+  border-radius: .35rem;
+  font-size: .8rem;
+  font-weight: 600;
+  background-color: var(--dite-ocre);
+  color: var(--dite-ebene);
+}
+.badge-exemple {
+  display: inline-block;
+  padding: .15em .5em;
+  border: 1px dashed var(--dite-brun-gris);
+  border-radius: .35rem;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--dite-brun-gris);
+  background: #fff;
+  vertical-align: middle;
+}
+.badge-oui { background-color: #146C43; color: #fff; }
+.badge-non { background-color: var(--dite-sable-fonce); color: var(--dite-ebene); }
+
+/* Elements a completer par le departement */
+.a-completer {
+  font-style: italic;
+  color: var(--dite-brun-gris);
+}
+
+/* 5. Gabarit ------------------------------------------------------------ */
+.lien-evitement {
+  position: absolute;
+  left: 1rem;
+  top: .5rem;
+  z-index: 2000;
+  padding: .5rem 1rem;
+  background: var(--dite-ocre);
+  color: var(--dite-ebene);
+  font-weight: 600;
+  border-radius: .35rem;
+}
+
+.bandeau-travail {
+  background: #FBF3E2;
+  color: #5A4512;
+  font-size: .9rem;
+  padding: .35rem 0;
+  text-align: center;
+}
+
+.site-nav {
+  background-color: var(--dite-ebene);
+  --bs-navbar-color: rgba(255, 255, 255, .88);
+  --bs-navbar-hover-color: #fff;
+  --bs-navbar-active-color: #fff;
+  --bs-navbar-padding-y: .5rem;
+}
+.site-nav .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  white-space: normal;
+  max-width: calc(100% - 4rem);
+}
+.brand-logo {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+}
+.brand-logo img { height: 40px; width: auto; }
+.brand-texte { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-nom {
+  font-family: var(--dite-titres);
+  font-weight: 600;
+  font-size: .95rem;
+  color: #fff;
+}
+.brand-ecole { font-size: .8rem; color: rgba(255, 255, 255, .8); }
+.site-nav .nav-link {
+  font-weight: 600;
+  position: relative;
+}
+@media (min-width: 992px) {
+  .brand-nom { font-size: .9rem; max-width: 16rem; }
+  .site-nav .nav-link { padding-left: .6rem !important; padding-right: .6rem !important; }
+  .site-nav .nav-link.active::after,
+  .site-nav .nav-link.show::after {
+    content: "";
+    position: absolute;
+    left: .6rem;
+    right: .6rem;
+    bottom: -.55rem;
+    height: 3px;
+    background: var(--dite-ocre);
+    border-radius: 2px;
+  }
+}
+@media (min-width: 1200px) {
+  .brand-nom { max-width: none; }
+}
+@media (max-width: 991.98px) {
+  .site-nav .navbar-collapse { padding: .5rem 0 1rem; }
+  .site-nav .nav-link.active { color: var(--dite-ocre); }
+  .site-nav .nav-link.active::before {
+    content: "";
+    position: absolute;
+    left: -.75rem;
+    top: .5rem;
+    bottom: .5rem;
+    width: 3px;
+    background: var(--dite-ocre);
+  }
+  .site-nav .dropdown-menu { background: transparent; border: 0; padding-top: 0; }
+  .site-nav .dropdown-item { color: rgba(255, 255, 255, .88); }
+  .site-nav .dropdown-item:hover, .site-nav .dropdown-item:focus { background: rgba(255, 255, 255, .08); color: #fff; }
+  .site-nav .dropdown-item.active { background: transparent; color: var(--dite-ocre); }
+}
+.site-nav .navbar-toggler { border-color: rgba(255, 255, 255, .35); }
+
+/* Fond commun du bandeau d'accueil et des bandeaux de titre */
+.hero,
+.page-header {
+  color: #fff;
+  background-color: var(--dite-ebene);
+  background-image:
+    radial-gradient(ellipse at 100% 0%, rgba(166, 61, 36, .55) 0%, rgba(166, 61, 36, 0) 55%),
+    linear-gradient(160deg, #1E1A17 0%, #2A211C 100%);
+}
+.page-header { padding: 2.5rem 0 2.25rem; }
+.page-header h1 { color: #fff; margin-bottom: .5rem; }
+.page-header .lead { color: rgba(255, 255, 255, .85); margin-bottom: 0; }
+.page-header .breadcrumb {
+  --bs-breadcrumb-divider-color: rgba(255, 255, 255, .6);
+  --bs-breadcrumb-item-active-color: rgba(255, 255, 255, .85);
+  margin-bottom: .75rem;
+}
+.page-header .breadcrumb a { color: #fff; }
+.page-header .breadcrumb a:hover { color: var(--dite-ocre); }
+
+.hero { padding: 3rem 0; }
+.hero h1 { color: #fff; font-size: calc(1.8rem + 1.8vw); line-height: 1.12; }
+@media (min-width: 1200px) { .hero h1 { font-size: 3rem; } }
+.hero .surtitre { color: var(--dite-ocre); font-weight: 600; margin-bottom: .75rem; }
+.hero p.lead { color: rgba(255, 255, 255, .88); }
+.hero-image {
+  border-radius: var(--bs-border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, .35);
+}
+.hero-image img { display: block; width: 100%; height: auto; }
+.hero-image figcaption {
+  font-size: .85rem;
+  color: rgba(255, 255, 255, .8);
+  padding: .5rem .75rem;
+  background: rgba(0, 0, 0, .35);
+}
+@media (min-width: 992px) { .hero { padding: 4.5rem 0; } }
+
+.site-footer {
+  background-color: var(--dite-ebene);
+  color: rgba(255, 255, 255, .85);
+  padding: 3rem 0 1.5rem;
+  font-size: .98rem;
+}
+.site-footer a { color: #fff; text-decoration: none; }
+.site-footer a:hover { color: var(--dite-ocre); text-decoration: underline; }
+.footer-titre {
+  font-family: var(--dite-titres);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .9rem;
+}
+.footer-marque { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+.footer-marque img { height: 48px; width: auto; }
+.footer-liens li { margin-bottom: .35rem; }
+.footer-contact li { display: flex; gap: .6rem; margin-bottom: .45rem; }
+.footer-contact .bi { color: var(--dite-ocre); }
+.footer-bas {
+  border-top: 1px solid rgba(255, 255, 255, .15);
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  font-size: .88rem;
+  color: rgba(255, 255, 255, .75);
+}
+
+/* 6. Sections et blocs ------------------------------------------------- */
+.section { padding: 3rem 0; }
+@media (min-width: 992px) { .section { padding: 4rem 0; } }
+.section-alt { background-color: var(--dite-sable); }
+
+.titre-section {
+  position: relative;
+  padding-bottom: .65rem;
+  margin-bottom: 1.75rem;
+}
+.titre-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--dite-laterite);
+}
+.text-center .titre-section::after,
+.titre-section.text-center::after { left: 50%; transform: translateX(-50%); }
+
+.card {
+  --bs-card-border-color: var(--dite-sable-fonce);
+  --bs-card-border-radius: var(--bs-border-radius-lg);
+}
+.card-lien { transition: box-shadow .15s ease, transform .15s ease; }
+.card-lien:hover { box-shadow: 0 .5rem 1.5rem rgba(var(--dite-ebene-rgb), .1); transform: translateY(-2px); }
+.card-lien .stretched-link { text-decoration: none; color: inherit; }
+.card-lien .stretched-link:hover { color: var(--dite-laterite); }
+
+.icone-carre {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: .6rem;
+  background: var(--dite-laterite-clair);
+  color: var(--dite-laterite);
+  font-size: 1.4rem;
+  flex: 0 0 auto;
+}
+
+.chiffre-cle {
+  background: #fff;
+  border: 1px solid var(--dite-sable-fonce);
+  border-radius: var(--bs-border-radius-lg);
+  padding: 1rem .75rem;
+  text-align: center;
+  height: 100%;
+}
+.chiffre-cle .valeur {
+  display: block;
+  font-family: var(--dite-titres);
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: var(--dite-laterite);
+}
+.chiffre-cle .libelle { font-size: .92rem; color: var(--dite-brun-gris); }
+
+/* Emplacement d'image neutre aux couleurs de la charte */
+.emplacement-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  aspect-ratio: 16 / 9;
+  background-color: var(--dite-sable);
+  background-image: repeating-linear-gradient(135deg, rgba(166, 61, 36, .06) 0 14px, transparent 14px 28px);
+  color: var(--dite-brun-gris);
+  text-align: center;
+  font-size: .9rem;
+  padding: 1rem;
+}
+.emplacement-image .bi { font-size: 1.8rem; color: var(--dite-laterite); }
+.emplacement-image.ratio-4x3 { aspect-ratio: 4 / 3; }
+
+.lien-fleche { font-weight: 600; }
+.lien-fleche .bi { transition: transform .15s ease; display: inline-block; }
+.lien-fleche:hover .bi { transform: translateX(3px); }
+
+.liste-check { list-style: none; padding-left: 0; }
+.liste-check li { position: relative; padding-left: 1.75rem; margin-bottom: .6rem; }
+.liste-check li > .bi:first-child { position: absolute; left: 0; top: .1rem; color: var(--dite-laterite); }
+
+.carte-statut { height: 100%; }
+.carte-statut.mise-en-avant { border: 2px solid var(--dite-ebene); }
+
+.sources {
+  font-size: .88rem;
+  color: var(--dite-brun-gris);
+  border-top: 1px solid var(--dite-sable-fonce);
+  padding-top: 1rem;
+  margin-top: 2rem;
+}
+.sources a { word-break: break-word; }
+
+/* Schema du cursus */
+.schema-cursus .etape {
+  border: 1px solid var(--dite-sable-fonce);
+  border-radius: .6rem;
+  background: #fff;
+  padding: .7rem .9rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+}
+.schema-cursus .etape small { font-weight: 400; color: var(--dite-brun-gris); }
+.schema-cursus .etape.entree { text-align: left; }
+.schema-cursus .etape.diplome {
+  border: 2px solid var(--dite-laterite);
+  background: var(--dite-laterite-clair);
+  color: var(--dite-laterite-fonce);
+}
+.schema-cursus .etape.pointille { border-style: dashed; color: var(--dite-brun-gris); font-weight: 600; }
+.schema-cursus .libelle-cycle { font-size: .92rem; font-weight: 600; color: var(--dite-brun-gris); margin: 1.25rem 0 .5rem; }
+.schema-cursus .fleche { color: var(--dite-brun-gris); }
+
+/* Documents a telecharger */
+.liste-documents .list-group-item { display: flex; gap: .9rem; align-items: flex-start; padding: .9rem 1rem; }
+.liste-documents .bi { font-size: 1.5rem; color: var(--dite-laterite); }
+.liste-documents .meta { font-size: .88rem; color: var(--dite-brun-gris); }
+
+/* Actualites */
+.carte-actu .emplacement-image { border-radius: var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0 0; }
+.carte-actu .date { font-size: .9rem; color: var(--dite-brun-gris); }
+.carte-actu .card-title { font-size: 1.2rem; }
+.article-corps { max-width: 46rem; }
+.article-corps p { margin-bottom: 1.1rem; }
+
+/* Carte d'acces (plan) */
+.encart-plan {
+  border-radius: var(--bs-border-radius-lg);
+  overflow: hidden;
+}
+
+/* 7. Enseignants -------------------------------------------------------- */
+.filtres { display: flex; flex-wrap: wrap; gap: .5rem; }
+.filtres .btn.active { --bs-btn-active-bg: #A63D24; --bs-btn-active-color: #fff; }
+
+.carte-enseignant { height: 100%; overflow: hidden; }
+.carte-enseignant .photo {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background: var(--dite-sable);
+  display: block;
+}
+.carte-enseignant .photo-vide {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background: linear-gradient(180deg, var(--dite-sable-fonce), var(--dite-sable));
+  color: var(--dite-brun-gris);
+  font-size: .88rem;
+}
+.carte-enseignant .photo-vide .bi { font-size: 3.5rem; color: #C9B9A7; line-height: 1; }
+.carte-enseignant .grade { color: var(--dite-brun-gris); margin-bottom: .15rem; }
+.carte-enseignant .fonction { font-size: .92rem; color: var(--dite-brun-gris); }
+.carte-enseignant .libelle-tags { font-weight: 600; font-size: .92rem; color: var(--dite-brun-gris); margin: .9rem 0 .35rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; padding: 0; margin: 0; }
+.tag {
+  display: inline-block;
+  padding: .2em .65em;
+  border-radius: 1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.tag-enseigne { background: var(--dite-laterite-clair); color: var(--dite-laterite-fonce); }
+.tag-recherche { background: var(--dite-ocre-clair); color: var(--dite-ocre-texte); }
+
+.icones-contact { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; padding: 0; margin: 1rem 0; }
+.btn-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--dite-sable-fonce);
+  background: #fff;
+  color: var(--dite-ebene);
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.btn-icone:hover { background: var(--dite-sable); border-color: var(--dite-laterite); color: var(--dite-laterite); }
+.btn-icone img { width: 1.05rem; height: 1.05rem; }
+
+.profil-detail {
+  border-top: 1px solid var(--dite-sable-fonce);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  font-size: .98rem;
+}
+.profil-detail h4 { font-size: 1rem; margin-top: 1rem; }
+.profil-detail dl { margin-bottom: 0; }
+.profil-detail dt { font-weight: 600; }
+.profil-detail dd { margin-bottom: .5rem; word-break: break-word; }
+.publications li { margin-bottom: .6rem; }
+
+/* 8. Tableaux ----------------------------------------------------------- */
+.table-dite {
+  --bs-table-striped-bg: var(--dite-sable);
+  margin-bottom: 0;
+}
+.table-dite thead th {
+  background-color: var(--dite-ebene);
+  color: #fff;
+  font-weight: 600;
+  border-color: var(--dite-ebene);
+  vertical-align: middle;
+}
+.table-dite th[scope="row"] { font-weight: 600; }
+.legende-tableau { font-size: .88rem; color: var(--dite-brun-gris); margin-top: .6rem; }
+
+/* Sur mobile, chaque ligne devient une fiche avec libelles (main.js ajoute data-label) */
+@media (max-width: 767.98px) {
+  .table-cartes thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .table-cartes,
+  .table-cartes tbody,
+  .table-cartes tr,
+  .table-cartes td,
+  .table-cartes th[scope="row"] { display: block; width: 100%; }
+  .table-cartes tr {
+    border: 1px solid var(--dite-sable-fonce);
+    border-radius: .6rem;
+    margin-bottom: .75rem;
+    background: #fff;
+    overflow: hidden;
+  }
+  .table-cartes > :not(caption) > * > * { border-bottom-width: 0; box-shadow: none !important; }
+  .table-cartes td,
+  .table-cartes th[scope="row"] { padding: .45rem .85rem; }
+  .table-cartes th[scope="row"] { background: var(--dite-sable); }
+  .table-cartes td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--dite-brun-gris);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+}
+
+/* 9. Divers ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+@media print {
+  .site-nav, .bandeau-travail, .site-footer, .filtres, .lien-evitement { display: none !important; }
+  .hero, .page-header { background: none !important; color: #000 !important; }
+  .hero h1, .page-header h1 { color: #000 !important; }
+  .collapse { display: block !important; }
+}

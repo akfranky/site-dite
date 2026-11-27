@@ -1,0 +1,7 @@
+# Les fichiers tiers de lib/ sont conserves octet pour octet
+lib/** -text
+*.woff2 binary
+*.webp binary
+*.png binary
+*.pdf binary
+* text=auto eol=lf
