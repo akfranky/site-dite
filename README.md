@@ -20,9 +20,8 @@ site-dite/
 │   ├── departement.html              Présentation, mot du chef, missions, organisation
 │   ├── parcours.html                 Concours, auditeurs libres, comparatif, questions fréquentes
 │   ├── cursus.html                   Schéma du cursus, cycles, unités d'enseignement, stages
-│   ├── enseignants.html              Cartes des enseignants (résumé), personnel administratif
-│   ├── profil-tekouabou.html         Profil complet d'un enseignant (modèle à copier)
-│   ├── profil-exemple.html           Profil d'exemple, lié aux cartes d'exemple
+│   ├── enseignants.html              Cartes des enseignants (construites à partir des données)
+│   ├── profil.html                   Page de profil unique : profil.html?id=tekouabou
 │   ├── recherche.html                Domaines, mémoires, publications, séminaires
 │   ├── etudiants.html                Emplois du temps, calendrier, ressources, documents
 │   ├── actualites.html               Liste des actualités
@@ -33,6 +32,8 @@ site-dite/
 ├── assets/
 │   ├── css/style.css     Couleurs et mise en forme du site
 │   ├── js/main.js        Filtres, tableaux sur mobile, formulaire
+│   ├── js/enseignants.js Construction des cartes et de la page de profil
+│   ├── data/enseignants.js  Données de tous les enseignants (format JSON)
 │   ├── fonts/            Polices Montserrat et Source Sans 3
 │   ├── img/              Images : logo/, enseignants/, actualites/, pages/, icons/
 │   └── docs/             Documents PDF à télécharger
@@ -58,28 +59,49 @@ Repères utiles dans le code :
 - Rédaction : vouvoiement, phrases courtes, dates en toutes lettres (« 27 novembre 2026 »).
 - N'inventez rien : une information non confirmée reste marquée « à compléter ».
 
-## 4. Ajouter un enseignant
+## 4. Ajouter ou modifier un enseignant
 
-Chaque enseignant a deux éléments : une **carte** courte dans `pages/enseignants.html` (photo, nom, grade, trois domaines au plus) et une **page de profil** complète (`pages/profil-nom.html`).
+Toutes les informations des enseignants sont dans **un seul fichier** : `assets/data/enseignants.js`. Il n'y a rien à écrire en HTML :
 
-1. Préparez la photo (portrait, fond neutre). Convertissez-la avec :
+- la page `pages/enseignants.html` construit une carte par enseignant (photo, nom, grade, trois mots-clés) ;
+- la page unique `pages/profil.html` affiche le profil complet de l'enseignant indiqué dans l'adresse : `profil.html?id=tekouabou`.
+
+### Pourquoi un fichier .js et pas .json
+
+Le site doit fonctionner en ouvrant les fichiers directement (double-clic). Dans ce cas, les navigateurs interdisent de lire un fichier `.json` séparé. Le fichier `enseignants.js` contient donc du JSON strict, précédé d'une seule ligne : `window.DITE_ENSEIGNANTS =`. Ne modifiez pas cette ligne ni le `;` final ; tout ce qui est entre les crochets `[` et `]` suit les règles du JSON :
+
+- textes entre guillemets droits `"…"` ; une apostrophe s'écrit normalement (`l'école`) ;
+- une virgule entre deux éléments, **jamais** après le dernier ;
+- `true` / `false` sans guillemets.
+
+### Ajouter un enseignant
+
+1. Préparez la photo (portrait, fond neutre) :
    ```
-   python outils/convertir_image.py photo.jpg assets/img/enseignants/prenomnom.webp
+   python outils/convertir_image.py photo.jpg assets/img/enseignants/dupont.webp
    ```
-   Le script recadre en 4:3, réduit à 480 x 360 px et vérifie que le fichier pèse moins de 100 Ko. Sans Python, utilisez un site de conversion WebP puis vérifiez la taille.
-2. **Page de profil.** Copiez `pages/profil-tekouabou.html` sous le nom `pages/profil-dupont.html` (sans espace ni accent). Dans la copie, modifiez le `<title>`, la `meta description`, le fil d'Ariane, le `<h1>`, la photo (`src="../assets/img/enseignants/dupont.webp"` et `alt`), puis chaque section : présentation, enseignements, domaines de recherche, publications, contacts.
-   Pour les icônes de contact, supprimez la ligne `<li>…</li>` de chaque lien que l'enseignant n'a pas : une icône n'apparaît que si le lien existe. Pour GitHub, ajoutez :
-   ```html
-   <li><a class="btn-icone" href="https://github.com/IDENTIFIANT" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a></li>
-   ```
-3. **Carte.** Dans `pages/enseignants.html`, copiez le bloc qui commence par `<!-- ENSEIGNANT : Tekouabou … -->`, jusqu'à la balise `</div>` qui ferme la colonne, et collez-le juste après. Dans la copie, modifiez :
-   - `data-domaines="ia donnees tice"` : les domaines, séparés par une espace, parmi `tice`, `logiciel`, `reseaux`, `ia`, `donnees`. Ce sont eux qui font fonctionner les boutons de filtre ;
-   - `id="tekouabou"` : un identifiant unique (par exemple `dupont`) ;
-   - le lien `href="profil-tekouabou.html"` : le nom de la nouvelle page de profil ;
-   - la photo, le nom, le grade et les étiquettes de domaine (trois au plus).
-4. Supprimez un bloc `<!-- PROFIL D'EXEMPLE … -->` chaque fois qu'un vrai profil le remplace. Quand il n'en reste plus, supprimez aussi `pages/profil-exemple.html`.
-5. Mettez à jour le compteur écrit sous les filtres (« 4 profils affichés ») : il est recalculé à l'ouverture de la page, mais le nombre écrit sert si JavaScript est désactivé.
-6. Dans `pages/recherche.html`, ajoutez le nom de l'enseignant, avec un lien vers son profil, dans les domaines concernés.
+2. Dans `assets/data/enseignants.js`, copiez le bloc `{ … }` de l'enseignant `"id": "tekouabou"`, collez-le après lui (séparé par une virgule) et modifiez les valeurs :
+
+| Champ | Contenu |
+| --- | --- |
+| `id` | Identifiant unique, sans espace ni accent (`dupont`). Il forme l'adresse `profil.html?id=dupont` |
+| `exemple` | `false` pour un vrai profil |
+| `titre`, `nom` | `"Dr"`, `"Jean Dupont"` |
+| `grade`, `grade_detail` | Grade court (carte) et grade complet (profil) |
+| `fonction`, `depuis` | Responsabilité éventuelle ; date d'arrivée (`"septembre 2015"`) ou `""` |
+| `photo`, `photo_alt` | Nom du fichier dans `assets/img/enseignants/` et description ; `""` si pas de photo |
+| `domaines` | Codes du filtre : `tice`, `logiciel`, `reseaux`, `ia`, `donnees` |
+| `mots_cles_carte` | Trois mots-clés au plus, affichés sur la carte |
+| `presentation` | Liste de paragraphes |
+| `enseignements`, `recherche` | Listes de textes |
+| `publications` | Liste d'objets `auteurs`, `titre`, `source`, `annee`, `lien` |
+| `contacts` | `courriel`, `telephone`, `adresse`, `bureau` (`""` si inconnu : « À compléter » s'affiche) |
+| `liens` | `site`, `linkedin`, `scholar`, `orcid`, `researchgate`, `github`, `dblp` : une icône n'apparaît que si le lien est rempli |
+| `source` | Adresse d'où viennent les informations, ou `""` |
+
+3. Supprimez un bloc d'exemple (`"exemple": true`) chaque fois qu'un vrai profil le remplace.
+4. Dans `pages/recherche.html`, ajoutez le nom de l'enseignant dans ses domaines, avec le lien `profil.html?id=dupont`.
+5. Vérifiez : `python outils/verifier_liens.py` signale un JSON mal écrit (virgule en trop, guillemet oublié), un identifiant en double, une photo introuvable ou un lien vers un profil inexistant. Ouvrez ensuite `pages/enseignants.html` et la nouvelle fiche dans le navigateur.
 
 La publication d'une photo ou d'un numéro de téléphone demande l'accord écrit de l'enseignant.
 
@@ -155,7 +177,7 @@ Ces scripts demandent Python 3 (et Pillow pour les deux derniers). Lancez-les de
 
 | Commande | Rôle |
 | --- | --- |
-| `python outils/verifier_liens.py` | Liens internes, ancres, images et fichiers manquants |
+| `python outils/verifier_liens.py` | Liens internes, ancres, images et fichiers manquants, fichier des enseignants |
 | `python outils/valider_html.py` | Validation de chaque page par le service du W3C (connexion Internet nécessaire) |
 | `python outils/audit.py` | Poids des pages, images, `alt`, `lang`, titres, ressources externes, emojis, contrastes |
 | `python outils/captures.py` | Captures d'écran à 390, 768 et 1280 px dans `docs/captures/` (Chrome nécessaire) |

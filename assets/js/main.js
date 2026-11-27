@@ -5,8 +5,9 @@
  * 2. Libelles des tableaux sur mobile
  * 3. Formulaires : validation Bootstrap et blocage de l'envoi des formulaires de demonstration
  */
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   'use strict';
+  /* Execute apres les scripts de page (par exemple enseignants.js, qui construit les cartes). */
 
   /* 1. Filtres ------------------------------------------------------------
    * Groupe de boutons : <div data-filtre-groupe="id-de-la-liste">
@@ -93,4 +94,4 @@
       }
     });
   });
-})();
+});

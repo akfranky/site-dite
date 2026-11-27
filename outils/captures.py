@@ -1,8 +1,8 @@
 """Captures d'ecran pleine page de chaque page a 390, 768 et 1280 px de large.
 
 Usage (depuis le dossier du site) :
-    python outils/captures.py                 toutes les pages
-    python outils/captures.py index.html ...  certaines pages
+    python outils/captures.py                 toutes les pages (et chaque profil d'enseignant)
+    python outils/captures.py index.html ...  certaines pages ("pages/profil.html?id=tekouabou" accepte)
 
 Les images sont enregistrees dans docs/captures/<page>-<largeur>.png.
 
@@ -15,6 +15,7 @@ import base64
 import json
 import os
 import pathlib
+import re
 import shutil
 import socket
 import struct
@@ -134,7 +135,11 @@ def capturer(ws, url, largeur, cible):
 def main():
     chrome = trouver_chrome()
     pages = sys.argv[1:] or [p.relative_to(RACINE).as_posix() for p in
-                             sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html"))]
+                             sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html"))
+                             if p.name != "profil.html"]
+    if not sys.argv[1:]:
+        donnees = (RACINE / "assets/data/enseignants.js").read_text(encoding="utf-8")
+        pages += [f"pages/profil.html?id={i}" for i in re.findall(r'"id": "([^"]+)"', donnees)[:2]]
     SORTIE.mkdir(parents=True, exist_ok=True)
     port = 9333
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as profil:
@@ -156,9 +161,11 @@ def main():
             ws = WebSocket(onglet["webSocketDebuggerUrl"])
             ws.commande("Page.enable")
             for page in pages:
-                url = (RACINE / page).as_uri()
+                chemin, _, requete = page.partition("?")
+                url = (RACINE / chemin).as_uri() + ("?" + requete if requete else "")
+                suffixe = "-" + requete.split("=")[-1] if requete else ""
                 for largeur in LARGEURS:
-                    cible = SORTIE / f"{pathlib.Path(page).stem}-{largeur}.png"
+                    cible = SORTIE / f"{pathlib.Path(chemin).stem}{suffixe}-{largeur}.png"
                     capturer(ws, url, largeur, cible)
                     print(cible.relative_to(RACINE))
         finally:

@@ -41,7 +41,7 @@
 - [ ] Personnel administratif et technique : noms, fonctions, contacts.
 - [ ] Liste définitive des domaines du filtre (actuellement : Technologies éducatives, Génie logiciel, Réseaux et systèmes, Intelligence artificielle, Données).
 
-Les trois cartes « Profil d'exemple » et la page `pages/profil-exemple.html` sont à supprimer au fur et à mesure. Chaque enseignant aura sa page `pages/profil-nom.html`.
+Toutes ces informations se saisissent dans `assets/data/enseignants.js` (voir README, section 4). Les trois profils marqués `"exemple": true` sont à supprimer au fur et à mesure.
 
 ## 6. Recherche (pages/recherche.html)
 

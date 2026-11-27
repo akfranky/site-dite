@@ -9,15 +9,19 @@ Controles :
 - chaque ancre (#id), sur la meme page ou sur une autre page, existe ;
 - chaque cible de data-bs-target / aria-controls existe dans la page ;
 - aucun identifiant n'est en double dans une page ;
-- les url() des feuilles de style de assets/css pointent vers des fichiers existants.
+- les url() des feuilles de style de assets/css pointent vers des fichiers existants ;
+- assets/data/enseignants.js contient du JSON valide (apres la premiere ligne), des
+  identifiants uniques et des photos existantes, et chaque lien profil.html?id=xxx
+  vise un identifiant present dans ce fichier.
 
 Code de sortie : 0 si tout est correct, 1 sinon. Bibliotheque standard uniquement.
 """
+import json
 import pathlib
 import re
 import sys
 from html.parser import HTMLParser
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 RACINE = pathlib.Path(__file__).resolve().parent.parent
 SCHEMAS_EXTERNES = ("http", "https", "mailto", "tel", "data")
@@ -59,6 +63,27 @@ def analyser(fichier):
     return p
 
 
+def lire_enseignants(erreurs):
+    """Renvoie l'ensemble des identifiants du fichier de donnees des enseignants."""
+    fichier = RACINE / "assets" / "data" / "enseignants.js"
+    if not fichier.exists():
+        return set()
+    texte = fichier.read_text(encoding="utf-8")
+    debut, fin = texte.find("["), texte.rfind("]")
+    try:
+        donnees = json.loads(texte[debut:fin + 1])
+    except json.JSONDecodeError as e:
+        erreurs.append(f"assets/data/enseignants.js : JSON invalide ({e})")
+        return set()
+    ids = [d.get("id", "") for d in donnees]
+    for i in sorted({i for i in ids if ids.count(i) > 1}):
+        erreurs.append(f"assets/data/enseignants.js : identifiant en double '{i}'")
+    for d in donnees:
+        if d.get("photo") and not (RACINE / "assets/img/enseignants" / d["photo"]).exists():
+            erreurs.append(f"assets/data/enseignants.js : photo introuvable '{d['photo']}' ({d.get('id')})")
+    return set(ids)
+
+
 def main():
     afficher_externes = "--externes" in sys.argv
     pages = sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html"))
@@ -66,6 +91,7 @@ def main():
     analyses = {cle(f): analyser(f) for f in pages}
     dossiers = {cle(f): f.parent for f in pages}
     erreurs, externes, compte = [], set(), 0
+    ids_enseignants = lire_enseignants(erreurs)
 
     for nom, a in analyses.items():
         doublons = {i for i in a.ids if a.ids.count(i) > 1}
@@ -93,6 +119,10 @@ def main():
                 page_cible = cle(cible) if cle(cible) in analyses else None
             else:
                 page_cible = nom
+            if page_cible and page_cible.endswith("profil.html") and morceaux.query:
+                ident = parse_qs(morceaux.query).get("id", [""])[0]
+                if ident not in ids_enseignants:
+                    erreurs.append(f"{nom}:{ligne} : profil '{ident}' absent de assets/data/enseignants.js")
             if morceaux.fragment:
                 if page_cible is None:
                     erreurs.append(f"{nom}:{ligne} : ancre sur un fichier non HTML '{valeur}'")

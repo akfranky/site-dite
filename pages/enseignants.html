@@ -78,75 +78,13 @@
           <button type="button" class="btn btn-outline-primary" data-filtre="ia" aria-pressed="false">Intelligence artificielle</button>
           <button type="button" class="btn btn-outline-primary" data-filtre="donnees" aria-pressed="false">Données</button>
         </div>
-        <p class="text-secondary mb-0" aria-live="polite" data-filtre-compteur="liste-enseignants" data-singulier="profil affiché" data-pluriel="profils affichés">4 profils affichés</p>
+        <p class="text-secondary mb-0" aria-live="polite" data-filtre-compteur="liste-enseignants" data-singulier="profil affiché" data-pluriel="profils affichés"></p>
       </div>
       <p class="text-secondary small mb-4">Les profils marqués « profil d'exemple » montrent la mise en page ; chaque enseignant fournira et validera ses propres informations. Cliquez sur une carte pour ouvrir le profil complet.</p>
 
+      <!-- Les cartes sont construites a partir de assets/data/enseignants.js (voir README, section 4). -->
       <div class="row g-3 g-lg-4" id="liste-enseignants">
-        <!-- ENSEIGNANT : Tekouabou (profil complet : profil-tekouabou.html) -->
-        <div class="col-sm-6 col-lg-4 col-xl-3" data-domaines="ia donnees tice">
-          <article class="card carte-enseignant carte-compacte card-lien h-100" id="tekouabou">
-            <img class="photo" src="../assets/img/enseignants/tekouabou.webp" width="480" height="360" alt="Portrait de Cédric Stéphane Koumetio Tekouabou">
-            <div class="card-body p-3 d-flex flex-column">
-              <h3 class="h5 mb-1"><a class="stretched-link" href="profil-tekouabou.html">Dr Ing. Cédric Stéphane Koumetio Tekouabou</a></h3>
-              <p class="grade small mb-2">Chargé de cours</p>
-              <ul class="tags mb-3">
-                <li class="tag tag-recherche">Intelligence artificielle</li>
-                <li class="tag tag-recherche">Analyse de données</li>
-                <li class="tag tag-recherche">EdTech</li>
-              </ul>
-              <span class="lien-fleche mt-auto">Voir le profil <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </article>
-        </div>
-
-        <!-- PROFIL D'EXEMPLE 1 : a remplacer par un enseignant reel -->
-        <div class="col-sm-6 col-lg-4 col-xl-3" data-domaines="logiciel donnees">
-          <article class="card carte-enseignant carte-compacte card-lien h-100" id="exemple-1">
-            <div class="photo-vide"><i class="bi bi-person-fill" aria-hidden="true"></i><span>Photo, format 4:3</span></div>
-            <div class="card-body p-3 d-flex flex-column">
-              <p class="mb-2"><span class="badge-exemple">Profil d'exemple</span></p>
-              <h3 class="h5 mb-1"><a class="stretched-link" href="profil-exemple.html">Prénom Nom</a></h3>
-              <p class="grade small mb-2">Grade</p>
-              <ul class="tags mb-3">
-                <li class="tag tag-recherche">Systèmes d'information</li>
-              </ul>
-              <span class="lien-fleche mt-auto">Voir le profil <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </article>
-        </div>
-
-        <!-- PROFIL D'EXEMPLE 2 : a remplacer par un enseignant reel -->
-        <div class="col-sm-6 col-lg-4 col-xl-3" data-domaines="tice">
-          <article class="card carte-enseignant carte-compacte card-lien h-100" id="exemple-2">
-            <div class="photo-vide"><i class="bi bi-person-fill" aria-hidden="true"></i><span>Photo, format 4:3</span></div>
-            <div class="card-body p-3 d-flex flex-column">
-              <p class="mb-2"><span class="badge-exemple">Profil d'exemple</span></p>
-              <h3 class="h5 mb-1"><a class="stretched-link" href="profil-exemple.html">Prénom Nom</a></h3>
-              <p class="grade small mb-2">Grade</p>
-              <ul class="tags mb-3">
-                <li class="tag tag-recherche">Environnements informatiques pour l'apprentissage</li>
-              </ul>
-              <span class="lien-fleche mt-auto">Voir le profil <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </article>
-        </div>
-
-        <!-- PROFIL D'EXEMPLE 3 : a remplacer par un enseignant reel -->
-        <div class="col-sm-6 col-lg-4 col-xl-3" data-domaines="reseaux">
-          <article class="card carte-enseignant carte-compacte card-lien h-100" id="exemple-3">
-            <div class="photo-vide"><i class="bi bi-person-fill" aria-hidden="true"></i><span>Photo, format 4:3</span></div>
-            <div class="card-body p-3 d-flex flex-column">
-              <p class="mb-2"><span class="badge-exemple">Profil d'exemple</span></p>
-              <h3 class="h5 mb-1"><a class="stretched-link" href="profil-exemple.html">Prénom Nom</a></h3>
-              <p class="grade small mb-2">Grade</p>
-              <ul class="tags mb-3">
-                <li class="tag tag-recherche">Sécurité des réseaux</li>
-              </ul>
-              <span class="lien-fleche mt-auto">Voir le profil <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </article>
-        </div>
+        <noscript><p class="col-12 alert alert-warning">Activez JavaScript pour afficher la liste des enseignants.</p></noscript>
       </div>
       <p class="alert alert-light border mt-4" data-filtre-aucun="liste-enseignants" hidden>Aucun profil n'est encore publié pour ce domaine.</p>
     </div>
@@ -221,5 +159,7 @@
 <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/main.js"></script>
 <!-- /PIED -->
+<script src="../assets/data/enseignants.js"></script>
+<script src="../assets/js/enseignants.js"></script>
 </body>
 </html>
