@@ -717,3 +717,14 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 .conteneur-etroit { max-width: 54rem; }
+
+/* Cartes enseignants compactes et pages de profil */
+.carte-compacte .photo-vide .bi { font-size: 2.75rem; }
+.carte-compacte h3 a { color: var(--dite-ebene); }
+.carte-compacte:hover h3 a { color: var(--dite-laterite); }
+.carte-compacte .tag { font-size: .78rem; }
+@media (min-width: 992px) {
+  .profil-aside { position: sticky; top: 5.5rem; }
+}
+.profil-contacts dt { font-weight: 600; font-size: .9rem; color: var(--dite-brun-gris); }
+.profil-contacts dd { margin-bottom: .6rem; word-break: break-word; }
