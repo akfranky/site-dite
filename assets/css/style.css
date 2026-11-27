@@ -623,13 +623,13 @@ a:hover { text-decoration-thickness: 2px; }
 .tag-enseigne { background: var(--dite-laterite-clair); color: var(--dite-laterite-fonce); }
 .tag-recherche { background: var(--dite-ocre-clair); color: var(--dite-ocre-texte); }
 
-.icones-contact { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; padding: 0; margin: 1rem 0; }
+.icones-contact { display: flex; flex-wrap: wrap; gap: .3rem; list-style: none; padding: 0; margin: 1rem 0; }
 .btn-icone {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
   border: 1px solid var(--dite-sable-fonce);
   background: #fff;
@@ -639,7 +639,7 @@ a:hover { text-decoration-thickness: 2px; }
   transition: background-color .15s ease, border-color .15s ease;
 }
 .btn-icone:hover { background: var(--dite-sable); border-color: var(--dite-laterite); color: var(--dite-laterite); }
-.btn-icone img { width: 1.05rem; height: 1.05rem; }
+.btn-icone img { width: 1rem; height: 1rem; }
 
 .profil-detail {
   border-top: 1px solid var(--dite-sable-fonce);
