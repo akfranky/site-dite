@@ -46,11 +46,12 @@ def main() -> int:
         page = m.group(1)
         nouveau = texte
         for nom, modele in (("ENTETE", entete), ("PIED", pied)):
-            motif = re.compile(rf"(<!-- {nom} -->\n).*?(\n<!-- /{nom} -->)", re.S)
+            motif = re.compile(rf"(<!-- {nom} -->)\r?\n.*?(<!-- /{nom} -->)", re.S)
             if not motif.search(nouveau):
                 print(f"marqueurs {nom} absents : {fichier.name}")
                 continue
-            nouveau = motif.sub(lambda mm: mm.group(1) + remplir(modele, page) + mm.group(2), nouveau)
+            nouveau = motif.sub(
+                lambda mm: mm.group(1) + "\n" + remplir(modele, page) + "\n" + mm.group(2), nouveau)
         if nouveau != texte:
             fichier.write_text(nouveau, encoding="utf-8", newline="\n")
             modifiees += 1

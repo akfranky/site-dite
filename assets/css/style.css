@@ -307,50 +307,54 @@ a:hover { text-decoration-thickness: 2px; }
   align-items: center;
   gap: .75rem;
   white-space: normal;
-  max-width: calc(100% - 4rem);
+  max-width: calc(100% - 4.25rem);
+  margin-right: 0;
 }
 .brand-logo {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: #fff;
 }
-.brand-logo img { height: 40px; width: auto; }
+.brand-logo img { height: 36px; width: auto; }
+@media (min-width: 576px) { .brand-nom { font-size: .95rem; } .brand-ecole { font-size: .8rem; } }
 .brand-texte { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-nom {
   font-family: var(--dite-titres);
   font-weight: 600;
-  font-size: .95rem;
+  font-size: .85rem;
   color: #fff;
 }
-.brand-ecole { font-size: .8rem; color: rgba(255, 255, 255, .8); }
+.brand-ecole { font-size: .75rem; color: rgba(255, 255, 255, .8); }
 .site-nav .nav-link {
   font-weight: 600;
   position: relative;
+  white-space: nowrap;
 }
-@media (min-width: 992px) {
-  .brand-nom { font-size: .9rem; max-width: 16rem; }
-  .site-nav .nav-link { padding-left: .6rem !important; padding-right: .6rem !important; }
+@media (min-width: 1200px) {
+  .brand-nom { font-size: .9rem; max-width: 15.5rem; }
+  .site-nav .nav-link { padding-left: .55rem !important; padding-right: .55rem !important; }
   .site-nav .nav-link.active::after,
   .site-nav .nav-link.show::after {
     content: "";
     position: absolute;
-    left: .6rem;
-    right: .6rem;
+    left: .55rem;
+    right: .55rem;
     bottom: -.55rem;
     height: 3px;
     background: var(--dite-ocre);
     border-radius: 2px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .brand-nom { max-width: none; }
+  .site-nav .nav-link { padding-left: .75rem !important; padding-right: .75rem !important; }
 }
-@media (max-width: 991.98px) {
+@media (max-width: 1199.98px) {
   .site-nav .navbar-collapse { padding: .5rem 0 1rem; }
   .site-nav .nav-link.active { color: var(--dite-ocre); }
   .site-nav .nav-link.active::before {
@@ -567,7 +571,7 @@ a:hover { text-decoration-thickness: 2px; }
 .liste-documents .meta { font-size: .88rem; color: var(--dite-brun-gris); }
 
 /* Actualites */
-.carte-actu .emplacement-image { border-radius: var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0 0; }
+.carte-actu .emplacement-image { aspect-ratio: 2 / 1; border-radius: var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0 0; }
 .carte-actu .date { font-size: .9rem; color: var(--dite-brun-gris); }
 .carte-actu .card-title { font-size: 1.2rem; }
 .article-corps { max-width: 46rem; }
