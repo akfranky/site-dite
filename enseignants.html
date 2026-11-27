@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enseignants | DITE, ENS Yaoundé</title>
+  <meta name="description" content="Les enseignants du Département d'Informatique et des Technologies Éducatives de l'ENS de Yaoundé : enseignements, domaines de recherche, publications et contacts.">
+  <meta name="theme-color" content="#1E1A17">
+  <link rel="icon" href="assets/img/logo/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/logo/apple-touch-icon.png">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="enseignants">
+<!-- ENTETE -->
+<a class="visually-hidden-focusable lien-evitement" href="#contenu">Aller au contenu</a>
+<div class="bandeau-travail">
+  <div class="container"><i class="bi bi-pencil-square" aria-hidden="true"></i> Version de travail : les contenus marqués « exemple » ou « à compléter » attendent les informations du département.</div>
+</div>
+<header class="site-nav navbar navbar-expand-xl sticky-top" data-bs-theme="dark">
+  <nav class="container" aria-label="Menu principal">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-logo"><img src="assets/img/logo/ens-embleme.webp" width="27" height="40" alt=""></span>
+      <span class="brand-texte">
+        <span class="brand-nom">Département d'Informatique et des Technologies Éducatives</span>
+        <span class="brand-ecole">École Normale Supérieure de Yaoundé</span>
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Ouvrir ou fermer le menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu-principal">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="departement.html">Le département</a></li>
+        <li class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Formations</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="parcours.html">Parcours et admission</a></li>
+            <li><a class="dropdown-item" href="cursus.html">Cursus et niveaux</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="enseignants.html">Enseignants</a></li>
+        <li class="nav-item"><a class="nav-link" href="recherche.html">Recherche</a></li>
+        <li class="nav-item"><a class="nav-link" href="etudiants.html">Espace étudiants</a></li>
+        <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<!-- /ENTETE -->
+
+<main id="contenu" tabindex="-1">
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="Fil d'Ariane">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Enseignants</li>
+        </ol>
+      </nav>
+      <h1>Enseignants</h1>
+      <p class="lead">Leurs enseignements et leurs domaines de recherche</p>
+    </div>
+  </div>
+
+  <section id="equipe" class="section" aria-labelledby="titre-equipe">
+    <div class="container">
+      <h2 id="titre-equipe" class="visually-hidden">Corps enseignant</h2>
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+        <div class="filtres" role="group" aria-label="Filtrer par domaine" data-filtre-groupe="liste-enseignants">
+          <button type="button" class="btn btn-outline-primary active" data-filtre="tous" aria-pressed="true">Tous</button>
+          <button type="button" class="btn btn-outline-primary" data-filtre="tice" aria-pressed="false">Technologies éducatives</button>
+          <button type="button" class="btn btn-outline-primary" data-filtre="logiciel" aria-pressed="false">Génie logiciel</button>
+          <button type="button" class="btn btn-outline-primary" data-filtre="reseaux" aria-pressed="false">Réseaux et systèmes</button>
+          <button type="button" class="btn btn-outline-primary" data-filtre="ia" aria-pressed="false">Intelligence artificielle</button>
+          <button type="button" class="btn btn-outline-primary" data-filtre="donnees" aria-pressed="false">Données</button>
+        </div>
+        <p class="text-secondary mb-0" aria-live="polite" data-filtre-compteur="liste-enseignants" data-singulier="profil affiché" data-pluriel="profils affichés">4 profils affichés</p>
+      </div>
+      <p class="text-secondary small mb-4">Les profils marqués « profil d'exemple » montrent la mise en page ; chaque enseignant fournira et validera ses propres informations.</p>
+
+      <div class="row g-4" id="liste-enseignants">
+
+        <!-- ENSEIGNANT : Dr Ing. Cedric Stephane Koumetio Tekouabou -->
+        <div class="col-md-6 col-lg-4" data-domaines="ia donnees tice">
+          <article class="card carte-enseignant" id="tekouabou">
+            <img class="photo" src="assets/img/enseignants/tekouabou.webp" width="480" height="360"
+                 alt="Portrait de Cédric Stéphane Koumetio Tekouabou, bras croisés, sur fond clair">
+            <div class="card-body p-4">
+              <h3 class="mb-1">Dr Ing. Cédric Stéphane Koumetio Tekouabou</h3>
+              <p class="grade">Chargé de cours (Assistant Professor / Senior Lecturer)</p>
+              <p class="fonction mb-0">Managing Editor, African Cities Journal · au DITE depuis janvier 2023</p>
+
+              <p class="libelle-tags">Enseigne</p>
+              <ul class="tags">
+                <li class="tag tag-enseigne">Introduction à l'IA</li>
+                <li class="tag tag-enseigne">Apprentissage automatique</li>
+                <li class="tag tag-enseigne">Visualisation de données</li>
+                <li class="tag tag-enseigne">Outils numériques pour l'école</li>
+                <li class="tag text-secondary">et 6 autres</li>
+              </ul>
+              <p class="libelle-tags">Recherche</p>
+              <ul class="tags">
+                <li class="tag tag-recherche">Apprentissage automatique</li>
+                <li class="tag tag-recherche">Analyse de données</li>
+                <li class="tag tag-recherche">Villes intelligentes</li>
+                <li class="tag tag-recherche">EdTech</li>
+                <li class="tag text-secondary">et 3 autres</li>
+              </ul>
+
+              <ul class="icones-contact">
+                <li><a class="btn-icone" href="mailto:ctekouaboukoumetio@gmail.com" aria-label="Courriel de Cédric Stéphane Koumetio Tekouabou"><i class="bi bi-envelope" aria-hidden="true"></i></a></li>
+                <li><a class="btn-icone" href="tel:+237697646978" aria-label="Téléphone de Cédric Stéphane Koumetio Tekouabou"><i class="bi bi-telephone" aria-hidden="true"></i></a></li>
+                <li><a class="btn-icone" href="https://sites.google.com/view/sctekouaboukoumetio/home" aria-label="Site web personnel"><i class="bi bi-globe2" aria-hidden="true"></i></a></li>
+                <li><a class="btn-icone" href="https://www.linkedin.com/in/c%C3%A9dric-st%C3%A9phane-tekouabou-koumetio-a0364a119/" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a></li>
+                <li><a class="btn-icone" href="https://scholar.google.com/citations?user=VEftSKsAAAAJ&amp;hl=fr" aria-label="Profil Google Scholar"><img src="assets/img/icons/googlescholar.svg" width="17" height="17" alt=""></a></li>
+                <li><a class="btn-icone" href="https://orcid.org/0000-0003-3627-5746" aria-label="Profil ORCID"><img src="assets/img/icons/orcid.svg" width="17" height="17" alt=""></a></li>
+                <li><a class="btn-icone" href="https://www.researchgate.net/profile/Cedric_Stephane_Koumetio_Tekouabou" aria-label="Profil ResearchGate"><img src="assets/img/icons/researchgate.svg" width="17" height="17" alt=""></a></li>
+              </ul>
+
+              <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#profil-tekouabou" aria-expanded="false" aria-controls="profil-tekouabou">Voir le profil</button>
+
+              <div class="collapse" id="profil-tekouabou">
+                <div class="profil-detail">
+                  <h4>Présentation</h4>
+                  <p>Docteur en informatique de l'Université Chouaib Doukkali (Maroc, 2020) et ingénieur d'État en réseaux et télécommunications de l'ENSA d'El Jadida (2016). Il a été chercheur postdoctoral au Center of Urban Systems de l'Université Mohammed VI Polytechnique de 2020 à 2023, puis a rejoint le DITE en janvier 2023. Il est Managing Editor de l'African Cities Journal et relecteur pour la revue Sustainable Cities and Society.</p>
+
+                  <h4>Enseignements à l'ENS</h4>
+                  <ul>
+                    <li>Outils numériques de production pour l'école</li>
+                    <li>Visualisation de données</li>
+                    <li>Introduction à l'intelligence artificielle</li>
+                    <li>Apprentissage automatique</li>
+                    <li>Apprentissage profond</li>
+                    <li>Traitement automatique des langues</li>
+                    <li>Python pour l'apprentissage automatique</li>
+                    <li>Systèmes linéaires</li>
+                    <li>Calcul symbolique</li>
+                    <li>Programmation des automates finis</li>
+                  </ul>
+
+                  <h4>Domaines de recherche</h4>
+                  <p>Analyse de données, apprentissage automatique, intelligence artificielle, ingénierie et modélisation urbaines, villes intelligentes, EdTech, vision par ordinateur.</p>
+
+                  <h4>Publications récentes</h4>
+                  <ol class="publications ps-3">
+                    <li>S. C. K. Tékouabou, D. Fotué, M. Haddioui, S. Yuldashev, A. Pardayev, « Contextualizing Generative AI in Secondary Education: A RAG-Based Conceptual Framework for Lesson Planning in Cameroon », <em>Multimodal Technologies and Interaction</em>, vol. 10, n° 12, art. 126, 2026. <a href="https://doi.org/10.3390/mti10120126">doi:10.3390/mti10120126</a></li>
+                    <li>A. Yu. Ghazaryan, C. S. Tekouabou Koumetio, A. S. Kirakosyan, M. Arshakyan, K. Khudaverdyan, G. Zaprosyan, « Explainable Machine Learning for PM2.5 Prediction and Comparative Country-Level Risk Assessment in Europe and Central Asia », <em>Urban Science</em>, vol. 10, n° 11, art. 676, 2026. <a href="https://doi.org/10.3390/urbansci10110676">doi:10.3390/urbansci10110676</a></li>
+                    <li>K. Idrissi Gartoumi, A. H. Zolait, A. M. Alawag, C. S. Koumetio Tekouabou, « AI-based BIM for facility management: insights from practical applications », <em>2026 International Conference on Frontiers of Engineering and Emerging Technologies (FET)</em>, p. 1-6, 2026. <a href="https://doi.org/10.1109/fet68771.2026.11601525">doi:10.1109/fet68771.2026.11601525</a></li>
+                    <li>E. D. Kameni, C. S. Tekouabou Koumetio, M. Djoutieu Tegankong, S. D. Priso Essawe Ndedi, « Improving Predictions of Student Performance and Personalized School Guidance with Hybrid Machine Learning Models », dans <em>Technological Innovation and Sustainability through AI</em>, p. 53-69, 2026. <a href="https://doi.org/10.1201/9781003649885-4">doi:10.1201/9781003649885-4</a></li>
+                    <li>A. G. Belinga, S. C. Tékouabou Koumetio, M. El Haziti, « Hybrid ConvLSTM U-Net Deep Neural Network for Land Use and Land Cover Classification from Multi-Temporal Sentinel-2 Images: Application to Yaoundé, Cameroon », <em>Mathematical and Computational Applications</em>, vol. 31, n° 1, art. 18, 2026. <a href="https://doi.org/10.3390/mca31010018">doi:10.3390/mca31010018</a></li>
+                  </ol>
+                  <p class="small text-secondary">Les cinq publications les plus récentes selon ORCID et Crossref, consultés le 27 novembre 2026. Liste complète sur <a href="https://scholar.google.com/citations?user=VEftSKsAAAAJ&amp;hl=fr">Google Scholar</a>, <a href="https://dblp.org/pid/235/1564.html">DBLP</a> et <a href="https://orcid.org/0000-0003-3627-5746">ORCID</a>.</p>
+
+                  <h4>Contacts</h4>
+                  <dl>
+                    <dt>Courriel</dt><dd><a href="mailto:ctekouaboukoumetio@gmail.com">ctekouaboukoumetio@gmail.com</a></dd>
+                    <dt>Téléphone</dt><dd><a href="tel:+237697646978">+237 697 64 69 78</a></dd>
+                    <dt>Adresse</dt><dd>DITE, École Normale Supérieure, BP 47 Yaoundé</dd>
+                    <dt>Site web</dt><dd><a href="https://sites.google.com/view/sctekouaboukoumetio/home">sites.google.com/view/sctekouaboukoumetio</a></dd>
+                    <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/c%C3%A9dric-st%C3%A9phane-tekouabou-koumetio-a0364a119/">linkedin.com/in/cédric-stéphane-tekouabou-koumetio</a></dd>
+                    <dt>Google Scholar</dt><dd><a href="https://scholar.google.com/citations?user=VEftSKsAAAAJ&amp;hl=fr">scholar.google.com, profil VEftSKsAAAAJ</a></dd>
+                    <dt>ORCID</dt><dd><a href="https://orcid.org/0000-0003-3627-5746">0000-0003-3627-5746</a></dd>
+                    <dt>ResearchGate</dt><dd><a href="https://www.researchgate.net/profile/Cedric_Stephane_Koumetio_Tekouabou">researchgate.net/profile/Cedric_Stephane_Koumetio_Tekouabou</a></dd>
+                    <dt>DBLP</dt><dd><a href="https://dblp.org/pid/235/1564.html">dblp.org/pid/235/1564</a></dd>
+                  </dl>
+                  <p class="small text-secondary mt-3 mb-0">Source : <a href="https://sites.google.com/view/sctekouaboukoumetio/home">page personnelle de l'enseignant</a>. Bureau et horaires de réception : <span class="a-completer">à compléter</span>.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- PROFIL D'EXEMPLE 1 : a remplacer par un enseignant reel -->
+        <div class="col-md-6 col-lg-4" data-domaines="logiciel donnees">
+          <article class="card carte-enseignant" id="exemple-1">
+            <div class="photo-vide"><i class="bi bi-person-fill" aria-hidden="true"></i><span>Photo de présentation, format 4:3</span></div>
+            <div class="card-body p-4">
+              <p class="mb-2"><span class="badge-exemple">Profil d'exemple</span></p>
+              <h3 class="mb-1">Prénom Nom</h3>
+              <p class="grade">Grade</p>
+              <p class="fonction mb-0">Fonction éventuelle (par exemple, responsable d'un niveau)</p>
+              <p class="libelle-tags">Enseigne</p>
+              <ul class="tags">
+                <li class="tag tag-enseigne">Génie logiciel</li>
+                <li class="tag tag-enseigne">Bases de données</li>
+              </ul>
+              <p class="libelle-tags">Recherche</p>
+              <ul class="tags">
+                <li class="tag tag-recherche">Systèmes d'information</li>
+              </ul>
+              <p class="small text-secondary mt-3">Les icônes de contact apparaîtront ici, une par lien fourni.</p>
+              <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#profil-exemple-1" aria-expanded="false" aria-controls="profil-exemple-1">Voir le profil</button>
+              <div class="collapse" id="profil-exemple-1">
+                <div class="profil-detail">
+                  <h4>Présentation</h4>
+                  <p class="a-completer">Trois à cinq phrases sur le parcours et les travaux en cours, validées par l'enseignant.</p>
+                  <h4>Publications récentes</h4>
+                  <p class="a-completer">Trois à cinq publications ou projets, avec lien.</p>
+                  <h4>Contacts</h4>
+                  <p class="a-completer mb-0">Courriel institutionnel, téléphone (avec accord), bureau et horaires de réception.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- PROFIL D'EXEMPLE 2 : a remplacer par un enseignant reel -->
+        <div class="col-md-6 col-lg-4" data-domaines="tice">
+          <article class="card carte-enseignant" id="exemple-2">
+            <div class="photo-vide"><i class="bi bi-person-fill" aria-hidden="true"></i><span>Photo de présentation, format 4:3</span></div>
+            <div class="card-body p-4">
+              <p class="mb-2"><span class="badge-exemple">Profil d'exemple</span></p>
+              <h3 class="mb-1">Prénom Nom</h3>
+              <p class="grade">Grade</p>
+              <p class="fonction mb-0">Fonction éventuelle</p>
+              <p class="libelle-tags">Enseigne</p>
+              <ul class="tags">
+                <li class="tag tag-enseigne">Didactique de l'informatique</li>
+                <li class="tag tag-enseigne">TICE</li>
+              </ul>
+              <p class="libelle-tags">Recherche</p>
+              <ul class="tags">
+                <li class="tag tag-recherche">Environnements informatiques pour l'apprentissage</li>
+              </ul>
+              <p class="small text-secondary mt-3">Les icônes de contact apparaîtront ici, une par lien fourni.</p>
+              <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#profil-exemple-2" aria-expanded="false" aria-controls="profil-exemple-2">Voir le profil</button>
+              <div class="collapse" id="profil-exemple-2">
+                <div class="profil-detail">
+                  <h4>Présentation</h4>
+                  <p class="a-completer mb-0">Profil à remplacer par les informations fournies par l'enseignant.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- PROFIL D'EXEMPLE 3 : a remplacer par un enseignant reel -->
+        <div class="col-md-6 col-lg-4" data-domaines="reseaux">
+          <article class="card carte-enseignant" id="exemple-3">
+            <div class="photo-vide"><i class="bi bi-person-fill" aria-hidden="true"></i><span>Photo de présentation, format 4:3</span></div>
+            <div class="card-body p-4">
+              <p class="mb-2"><span class="badge-exemple">Profil d'exemple</span></p>
+              <h3 class="mb-1">Prénom Nom</h3>
+              <p class="grade">Grade</p>
+              <p class="fonction mb-0">Fonction éventuelle</p>
+              <p class="libelle-tags">Enseigne</p>
+              <ul class="tags">
+                <li class="tag tag-enseigne">Réseaux informatiques</li>
+                <li class="tag tag-enseigne">Systèmes d'exploitation</li>
+              </ul>
+              <p class="libelle-tags">Recherche</p>
+              <ul class="tags">
+                <li class="tag tag-recherche">Sécurité des réseaux</li>
+              </ul>
+              <p class="small text-secondary mt-3">Les icônes de contact apparaîtront ici, une par lien fourni.</p>
+              <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#profil-exemple-3" aria-expanded="false" aria-controls="profil-exemple-3">Voir le profil</button>
+              <div class="collapse" id="profil-exemple-3">
+                <div class="profil-detail">
+                  <h4>Présentation</h4>
+                  <p class="a-completer mb-0">Profil à remplacer par les informations fournies par l'enseignant.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p class="alert alert-light border mt-4" data-filtre-aucun="liste-enseignants" hidden>Aucun profil n'est encore publié pour ce domaine.</p>
+    </div>
+  </section>
+
+  <section id="personnel-administratif" class="section section-alt" aria-labelledby="titre-personnel">
+    <div class="container">
+      <h2 id="titre-personnel" class="titre-section">Personnel administratif</h2>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100"><div class="card-body d-flex gap-3">
+            <span class="icone-carre"><i class="bi bi-person-workspace" aria-hidden="true"></i></span>
+            <div>
+              <h3 class="h5 mb-1">Secrétariat du département</h3>
+              <p class="a-completer mb-0">Nom, fonction, courriel institutionnel et horaires d'ouverture à compléter.</p>
+            </div>
+          </div></div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100"><div class="card-body d-flex gap-3">
+            <span class="icone-carre"><i class="bi bi-pc-display" aria-hidden="true"></i></span>
+            <div>
+              <h3 class="h5 mb-1">Personnel technique</h3>
+              <p class="a-completer mb-0">Laboratoires et salles informatiques : nom et fonction à compléter, le cas échéant.</p>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- PIED -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="footer-marque">
+          <img src="assets/img/logo/ens-embleme-blanc.webp" width="32" height="48" alt="" loading="lazy">
+          <p class="footer-titre mb-0">DITE · ENS Yaoundé</p>
+        </div>
+        <p>Département d'Informatique et des Technologies Éducatives, École Normale Supérieure de Yaoundé, Université de Yaoundé I.</p>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <h2 class="footer-titre">Liens rapides</h2>
+        <ul class="list-unstyled footer-liens">
+          <li><a href="parcours.html">Parcours et admission</a></li>
+          <li><a href="cursus.html">Cursus et niveaux</a></li>
+          <li><a href="enseignants.html">Enseignants</a></li>
+          <li><a href="recherche.html">Recherche</a></li>
+          <li><a href="etudiants.html">Espace étudiants</a></li>
+          <li><a href="actualites.html">Actualités</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <h2 class="footer-titre">Contact</h2>
+        <ul class="list-unstyled footer-contact">
+          <li><i class="bi bi-telephone" aria-hidden="true"></i><span>Standard de l'ENS : <a href="tel:+237222231215">+237 222 231 215</a></span></li>
+          <li><i class="bi bi-envelope" aria-hidden="true"></i><a href="mailto:direction@ens.cm">direction@ens.cm</a></li>
+          <li><i class="bi bi-geo-alt" aria-hidden="true"></i><span>BP 47 Yaoundé, Cameroun</span></li>
+          <li><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i><a href="https://www.ens-yde.cm/">Site de l'ENS de Yaoundé</a></li>
+          <li><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i><a href="https://uy1.uninet.cm/">Université de Yaoundé I</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bas d-flex flex-wrap justify-content-between gap-2">
+      <p class="mb-0">© 2026 DITE, ENS de Yaoundé</p>
+      <p class="mb-0"><a href="contact.html">Contact</a> · <a href="#contenu">Haut de page</a></p>
+    </div>
+  </div>
+</footer>
+<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<!-- /PIED -->
+</body>
+</html>
