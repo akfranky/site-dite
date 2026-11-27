@@ -4,8 +4,8 @@
 </div>
 <header class="site-nav navbar navbar-expand-xl sticky-top" data-bs-theme="dark">
   <nav class="container" aria-label="Menu principal">
-    <a class="navbar-brand" href="index.html">
-      <span class="brand-logo"><img src="assets/img/logo/ens-embleme.webp" width="27" height="40" alt=""></span>
+    <a class="navbar-brand" href="{{racine}}index.html">
+      <span class="brand-logo"><img src="{{racine}}assets/img/logo/ens-embleme.webp" width="27" height="40" alt=""></span>
       <span class="brand-texte">
         <span class="brand-nom">Département d'Informatique et des Technologies Éducatives</span>
         <span class="brand-ecole">École Normale Supérieure de Yaoundé</span>
@@ -16,20 +16,20 @@
     </button>
     <div class="collapse navbar-collapse" id="menu-principal">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link{{actif index}}"{{courant index}} href="index.html">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link{{actif departement}}"{{courant departement}} href="departement.html">Le département</a></li>
+        <li class="nav-item"><a class="nav-link{{actif index}}"{{courant index}} href="{{racine}}index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link{{actif departement}}"{{courant departement}} href="{{pages}}departement.html">Le département</a></li>
         <li class="nav-item dropdown">
           <button class="nav-link dropdown-toggle{{actif parcours cursus}}" type="button" data-bs-toggle="dropdown" aria-expanded="false">Formations</button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item{{actif parcours}}"{{courant parcours}} href="parcours.html">Parcours et admission</a></li>
-            <li><a class="dropdown-item{{actif cursus}}"{{courant cursus}} href="cursus.html">Cursus et niveaux</a></li>
+            <li><a class="dropdown-item{{actif parcours}}"{{courant parcours}} href="{{pages}}parcours.html">Parcours et admission</a></li>
+            <li><a class="dropdown-item{{actif cursus}}"{{courant cursus}} href="{{pages}}cursus.html">Cursus et niveaux</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link{{actif enseignants}}"{{courant enseignants}} href="enseignants.html">Enseignants</a></li>
-        <li class="nav-item"><a class="nav-link{{actif recherche}}"{{courant recherche}} href="recherche.html">Recherche</a></li>
-        <li class="nav-item"><a class="nav-link{{actif etudiants}}"{{courant etudiants}} href="etudiants.html">Espace étudiants</a></li>
-        <li class="nav-item"><a class="nav-link{{actif actualites actualite}}"{{courant actualites}} href="actualites.html">Actualités</a></li>
-        <li class="nav-item"><a class="nav-link{{actif contact}}"{{courant contact}} href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link{{actif enseignants profil}}"{{courant enseignants}} href="{{pages}}enseignants.html">Enseignants</a></li>
+        <li class="nav-item"><a class="nav-link{{actif recherche}}"{{courant recherche}} href="{{pages}}recherche.html">Recherche</a></li>
+        <li class="nav-item"><a class="nav-link{{actif etudiants}}"{{courant etudiants}} href="{{pages}}etudiants.html">Espace étudiants</a></li>
+        <li class="nav-item"><a class="nav-link{{actif actualites actualite}}"{{courant actualites}} href="{{pages}}actualites.html">Actualités</a></li>
+        <li class="nav-item"><a class="nav-link{{actif contact}}"{{courant contact}} href="{{pages}}contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>

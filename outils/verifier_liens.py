@@ -61,8 +61,10 @@ def analyser(fichier):
 
 def main():
     afficher_externes = "--externes" in sys.argv
-    pages = sorted(RACINE.glob("*.html"))
-    analyses = {f.name: analyser(f) for f in pages}
+    pages = sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html"))
+    cle = lambda f: f.resolve().relative_to(RACINE).as_posix()
+    analyses = {cle(f): analyser(f) for f in pages}
+    dossiers = {cle(f): f.parent for f in pages}
     erreurs, externes, compte = [], set(), 0
 
     for nom, a in analyses.items():
@@ -84,11 +86,11 @@ def main():
                 continue
             chemin = unquote(morceaux.path)
             if chemin:
-                cible = (RACINE / chemin).resolve()
+                cible = (dossiers[nom] / chemin).resolve()
                 if not cible.exists():
                     erreurs.append(f"{nom}:{ligne} : {attr}='{valeur}' : fichier introuvable")
                     continue
-                page_cible = cible.name if cible.suffix == ".html" and cible.parent == RACINE else None
+                page_cible = cle(cible) if cle(cible) in analyses else None
             else:
                 page_cible = nom
             if morceaux.fragment:

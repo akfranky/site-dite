@@ -133,7 +133,8 @@ def capturer(ws, url, largeur, cible):
 
 def main():
     chrome = trouver_chrome()
-    pages = sys.argv[1:] or sorted(p.name for p in RACINE.glob("*.html"))
+    pages = sys.argv[1:] or [p.relative_to(RACINE).as_posix() for p in
+                             sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html"))]
     SORTIE.mkdir(parents=True, exist_ok=True)
     port = 9333
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as profil:

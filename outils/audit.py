@@ -114,8 +114,8 @@ class Page(HTMLParser):
             self.titre += data
 
 
-def taille(chemin):
-    p = RACINE / chemin
+def taille(base, chemin):
+    p = (base / chemin).resolve()
     return p.stat().st_size if p.exists() else 0
 
 
@@ -125,11 +125,12 @@ def main():
     css_communs = ["lib/bootstrap/css/bootstrap.min.css", "lib/bootstrap-icons/bootstrap-icons.min.css",
                    "assets/css/style.css", "lib/bootstrap-icons/fonts/bootstrap-icons.woff2"]
     polices = [str(p.relative_to(RACINE)).replace("\\", "/") for p in (RACINE / "assets/fonts").glob("*.woff2")]
-    for fichier in sorted(RACINE.glob("*.html")):
+    for fichier in sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html")):
+        base = fichier.parent
         texte = fichier.read_text(encoding="utf-8")
         p = Page()
         p.feed(texte)
-        nom = fichier.name
+        nom = fichier.relative_to(RACINE).as_posix()
         pb = []
         if p.lang != "fr":
             pb.append("lang absent ou different de fr")
@@ -156,7 +157,7 @@ def main():
             if not src.endswith((".webp", ".svg")):
                 pb.append(f"image non WebP ligne {ligne} ({src})")
             limite = 100 if "/enseignants/" in src else 150
-            if taille(src) > limite * 1024:
+            if taille(base, src) > limite * 1024:
                 pb.append(f"image de plus de {limite} Ko : {src}")
         externes = [r for r in p.ressources if re.match(r"^(https?:)?//", r)]
         if externes:
@@ -167,13 +168,13 @@ def main():
             cible = imgs_differees if a.get("loading") == "lazy" else imgs_immediates
             srcset = [m.strip().split()[0] for m in (a.get("srcset") or "").split(",") if m.strip()]
             cible.add(srcset[-1] if srcset else a.get("src", ""))  # variante la plus lourde
-        fixes = len(texte.encode()) + sum(taille(c) for c in css_communs) + sum(taille(c) for c in polices)
-        fixes += taille("lib/bootstrap/js/bootstrap.bundle.min.js") + taille("assets/js/main.js")
-        fixes += taille("assets/img/logo/favicon-32.png")
-        immediat = fixes + sum(taille(i) for i in imgs_immediates)
-        total = immediat + sum(taille(i) for i in imgs_differees)
+        fixes = len(texte.encode()) + sum(taille(RACINE, c) for c in css_communs) + sum(taille(RACINE, c) for c in polices)
+        fixes += taille(RACINE, "lib/bootstrap/js/bootstrap.bundle.min.js") + taille(RACINE, "assets/js/main.js")
+        fixes += taille(RACINE, "assets/img/logo/favicon-32.png")
+        immediat = fixes + sum(taille(base, i) for i in imgs_immediates)
+        total = immediat + sum(taille(base, i) for i in imgs_differees)
         etat = "OK" if not pb else "A CORRIGER"
-        print(f"{nom:18} {etat:10} h1={p.titres.count(1)} titres={''.join(map(str, p.titres))[:40]:40} "
+        print(f"{nom:30} {etat:10} h1={p.titres.count(1)} titres={''.join(map(str, p.titres))[:40]:40} "
               f"premier chargement {immediat / 1024:6.0f} Ko, total {total / 1024:6.0f} Ko")
         for x in pb:
             print("    -", x)

@@ -10,6 +10,8 @@ a la main une modification du menu ou du pied de page dans les onze pages.
 - Dans chaque page, le contenu situe entre les commentaires
   <!-- ENTETE --> ... <!-- /ENTETE --> et <!-- PIED --> ... <!-- /PIED -->
   est remplace par le modele.
+- Les pages sont a la racine (index.html, 404.html) ou dans pages/ : dans le
+  modele, {{racine}} devient "" ou "../" et {{pages}} devient "pages/" ou "".
 - La page active du menu est lue dans l'attribut data-page de <body>.
   Dans le modele, {{actif a b}} devient " active" et {{courant a b}} devient
   ' aria-current="page"' quand data-page vaut a ou b.
@@ -22,13 +24,15 @@ RACINE = pathlib.Path(__file__).resolve().parent.parent
 GABARIT = RACINE / "outils" / "gabarit"
 
 
-def remplir(modele: str, page: str) -> str:
+def remplir(modele: str, page: str, dans_pages: bool) -> str:
     def actif(m):
         return " active" if page in m.group(1).split() else ""
 
     def courant(m):
         return ' aria-current="page"' if page in m.group(1).split() else ""
 
+    modele = modele.replace("{{racine}}", "../" if dans_pages else "")
+    modele = modele.replace("{{pages}}", "" if dans_pages else "pages/")
     modele = re.sub(r"\{\{actif ([^}]+)\}\}", actif, modele)
     return re.sub(r"\{\{courant ([^}]+)\}\}", courant, modele)
 
@@ -37,7 +41,8 @@ def main() -> int:
     entete = (GABARIT / "entete.html").read_text(encoding="utf-8").strip("\n")
     pied = (GABARIT / "pied.html").read_text(encoding="utf-8").strip("\n")
     modifiees = 0
-    for fichier in sorted(RACINE.glob("*.html")):
+    for fichier in sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html")):
+        dans_pages = fichier.parent.name == "pages"
         texte = fichier.read_text(encoding="utf-8")
         m = re.search(r'<body[^>]*\sdata-page="([^"]+)"', texte)
         if not m:
@@ -51,11 +56,11 @@ def main() -> int:
                 print(f"marqueurs {nom} absents : {fichier.name}")
                 continue
             nouveau = motif.sub(
-                lambda mm: mm.group(1) + "\n" + remplir(modele, page) + "\n" + mm.group(2), nouveau)
+                lambda mm: mm.group(1) + "\n" + remplir(modele, page, dans_pages) + "\n" + mm.group(2), nouveau)
         if nouveau != texte:
             fichier.write_text(nouveau, encoding="utf-8", newline="\n")
             modifiees += 1
-            print(f"mise a jour : {fichier.name}")
+            print(f"mise a jour : {fichier.relative_to(RACINE)}")
     print(f"{modifiees} page(s) modifiee(s).")
     return 0
 

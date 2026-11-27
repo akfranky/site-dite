@@ -3,7 +3,7 @@
     <div class="row g-4">
       <div class="col-lg-5">
         <div class="footer-marque">
-          <img src="assets/img/logo/ens-embleme-blanc.webp" width="32" height="48" alt="" loading="lazy">
+          <img src="{{racine}}assets/img/logo/ens-embleme-blanc.webp" width="32" height="48" alt="" loading="lazy">
           <p class="footer-titre mb-0">DITE · ENS Yaoundé</p>
         </div>
         <p>Département d'Informatique et des Technologies Éducatives, École Normale Supérieure de Yaoundé, Université de Yaoundé I.</p>
@@ -11,12 +11,12 @@
       <div class="col-sm-6 col-lg-3">
         <h2 class="footer-titre">Liens rapides</h2>
         <ul class="list-unstyled footer-liens">
-          <li><a href="parcours.html">Parcours et admission</a></li>
-          <li><a href="cursus.html">Cursus et niveaux</a></li>
-          <li><a href="enseignants.html">Enseignants</a></li>
-          <li><a href="recherche.html">Recherche</a></li>
-          <li><a href="etudiants.html">Espace étudiants</a></li>
-          <li><a href="actualites.html">Actualités</a></li>
+          <li><a href="{{pages}}parcours.html">Parcours et admission</a></li>
+          <li><a href="{{pages}}cursus.html">Cursus et niveaux</a></li>
+          <li><a href="{{pages}}enseignants.html">Enseignants</a></li>
+          <li><a href="{{pages}}recherche.html">Recherche</a></li>
+          <li><a href="{{pages}}etudiants.html">Espace étudiants</a></li>
+          <li><a href="{{pages}}actualites.html">Actualités</a></li>
         </ul>
       </div>
       <div class="col-sm-6 col-lg-4">
@@ -32,9 +32,9 @@
     </div>
     <div class="footer-bas d-flex flex-wrap justify-content-between gap-2">
       <p class="mb-0">© 2026 DITE, ENS de Yaoundé</p>
-      <p class="mb-0"><a href="contact.html">Contact</a> · <a href="#contenu">Haut de page</a></p>
+      <p class="mb-0"><a href="{{pages}}contact.html">Contact</a> · <a href="#contenu">Haut de page</a></p>
     </div>
   </div>
 </footer>
-<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="{{racine}}lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{racine}}assets/js/main.js"></script>

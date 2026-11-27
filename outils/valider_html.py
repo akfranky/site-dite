@@ -25,14 +25,14 @@ def valider(fichier):
 
 
 def main():
-    pages = [RACINE / p for p in sys.argv[1:]] or sorted(RACINE.glob("*.html"))
+    pages = [RACINE / p for p in sys.argv[1:]] or (sorted(RACINE.glob("*.html")) + sorted((RACINE / "pages").glob("*.html")))
     total_erreurs = 0
     for page in pages:
         messages = valider(page)
         erreurs = [m for m in messages if m["type"] == "error" or m.get("subType") == "fatal"]
         avert = [m for m in messages if m["type"] == "info" and m.get("subType") == "warning"]
         total_erreurs += len(erreurs)
-        print(f"{page.name:18} {len(erreurs)} erreur(s), {len(avert)} avertissement(s)")
+        print(f"{page.relative_to(RACINE).as_posix():30} {len(erreurs)} erreur(s), {len(avert)} avertissement(s)")
         for m in erreurs + avert:
             genre = "ERREUR" if m in erreurs else "avert."
             print(f"    {genre} ligne {m.get('lastLine', '?')} : {m['message']}")
