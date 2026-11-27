@@ -715,3 +715,5 @@ a:hover { text-decoration-thickness: 2px; }
   .hero h1, .page-header h1 { color: #000 !important; }
   .collapse { display: block !important; }
 }
+
+.conteneur-etroit { max-width: 54rem; }
